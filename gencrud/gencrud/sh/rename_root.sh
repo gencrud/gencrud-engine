@@ -16,3 +16,4 @@ function rename_root() {
   
   echo_green "The root was renamed!"; sleep 1;
 }
+
