@@ -1,4 +1,4 @@
-# Gen[crud] - free software for creating web projects
+# Gencrud - free software for creating web projects
 
 Gencrud is the platform for creating simple sites, corporate sites, internet-shop, or blogs. 
 The platform is easy to expand and customize, which will create a project of any complexity.
@@ -6,13 +6,13 @@ The platform is easy to expand and customize, which will create a project of any
 
 ## Install and run project
 
-### Get start
+### Get started
 ```
 git clone https://github.com/marychev/gencrud.git
 cd gencrud
-. gencrud/gencrud/sh/init.sh
+. install.sh
 ```
-Congratulations! Open browser - localhost:8000.
+Congratulations! Open browser - [localhost:8000](http://localhost:8000).
 
 ### Installation Description
 1. [Downolad](https://github.com/gencrud/gencrud) or [clone](https://github.com/gencrud/gencrud.git) a repo **gencrud**.
@@ -22,12 +22,13 @@ Congratulations! Open browser - localhost:8000.
 gencrud/
 .git/
 .gitignore
+install.sh
 README.md
 ```
 
 3. Next, we will install and run the project. This script will install a virtual environment, set a DB (SQLite by default), add a default theme.
 ```
-$ . gencrud/gencrud/sh/init.sh
+$ . install.sh
 ```
 
 **Congratulations!** Open browser - [localhost:8000](http://localhost:8000)
@@ -40,14 +41,15 @@ This should take about a minute!
 + **app/** - 	frontend folder (css, js, images, ...)
 + **gencrud/** - backand folder / core
 + **theme/** - 	theme folder (html, media, ...)
-+ **venv/**-  	virtual environment folder
++ **venv/** -  	virtual environment folder
 + README.md
++ install.sh
 + .gitignore
 
 
 ### Useful comands:
-> All next commands run from the root `project_name$` folder. 
-Go to the root `project_name$` folder.
+> All next commands run from the root `project_name` folder. 
+Go to the root `project_name` folder.
 
 
 **Create a supers user:**
@@ -63,11 +65,6 @@ $ python gencrud/manage.py runserver
 **Run tests:**
 ```
 $ python gencrud/manage.py test
-```
-
-**Installing a new theme / The first install:**
-```
-$ . gencrud/gencrud/sh/init.sh
 ```
 
 

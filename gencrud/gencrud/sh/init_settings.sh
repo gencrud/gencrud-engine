@@ -32,18 +32,20 @@ done
 
 
 function init_settings() {
-  echo_white "Check settings.py file";
+  echo_purple "... check settings.py file";
 
   if test -f $SETTINGS_PATH; then
-    echo_yellow "project_name: '$1' exists!"
+    echo_yellow "project_name: '$1' exists!\n\r"
   else
-    echo_purple "... start to create settings.py ..." ; sleep 2;
+    echo_purple "... start to create settings.py ..." ; sleep 1;
+    
     ROW="PROJECT_NAME = '$1'\nSITE_DOMAIN = '$1.com'\n"
     ROW_DB="DB_NAME = '$1'\nDB_USER = '$1'\nDB_PASSWORD = '{}888'.format('$1')\n"
     ROW_EMAIL="EMAIL_HOST_USER = '$1@emil.com'\nEMAIL_HOST_PASSWORD = '$1888'\n"
     ROWS=$ROW$ROW_DB$ROW_EMAIL
     echo -e $ROWS >> "${PWD}/gencrud/settings.py";
-    echo_green "settings.py was created into ${PWD}/gencrud folder!"
+
+    echo_green "settings.py was created into ${PWD}/gencrud folder!\n\r"; sleep 1;
   fi
 }
 

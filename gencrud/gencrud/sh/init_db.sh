@@ -25,18 +25,23 @@ done
 
 
 function init_sqlite() {
-  echo "Try to create migrations and run project";
+  echo_purple "Try to create migrations and run project";
   run_path=$1
   db_name=$2
 
   if test -f $PWD/theme/$db_name; then
-    echo_purple "File $PWD/theme/$db_name exist!"; sleep 2;
+    echo_yellow "File $PWD/theme/$db_name exist!\n\r"; sleep 2;
   else
     echo_purple "... start to init project ..." ; sleep 2;
+    
     python $run_path makemigrations
     python $run_path migrate
+
+    echo_green "The 'settings.py' file was created into ${PWD}/gencrud folder!\n\r"; sleep 1;
+
   fi
 }
+
 
 function __help_init_db() {
   echo -e "\n# --------------------- HELP --------------------- #\r"

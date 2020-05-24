@@ -6,8 +6,8 @@ source venv/bin/activate
 RUNSERVER_PATH=$PWD'/gencrud/manage.py'
 
 if test -f $RUNSERVER_PATH; then
-  echo_green "Project ${path} RUN! http://localhost:8000/"
   python $RUNSERVER_PATH runserver
+  echo_green "Project ${path} RUN! http://localhost:8000/\n\r"
  else
-  	echo_red "File doesn't found"
+  	echo_red "File doesn't found\n\r"
 fi

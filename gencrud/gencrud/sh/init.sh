@@ -9,7 +9,6 @@ if [[ "$PWD" =~ "gencrud" ]]; then
   source $SH_PATH"init_env.sh"
   source $SH_PATH"init_settings.sh"
   source $SH_PATH"init_theme.sh"
-  source $SH_PATH"remane_root.sh"
 
   rename_root $project_name
 

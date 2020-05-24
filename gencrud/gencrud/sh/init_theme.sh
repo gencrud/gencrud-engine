@@ -27,17 +27,20 @@ done
 function init_theme() {
   init_app
 
-  echo "Check theme workspace:";
+  echo_purple "... check theme workspace:";
 
   theme_path=$PWD"/theme/"
   zip_path=$PWD"/gencrud/gen/theme.zip"
 
   if test -d $theme_path; then
-    echo_purple "Theme ${theme_path} exist!"
+    echo_yellow "Theme ${theme_path} exist!\r\n"
   else
-    echo_purple "... start to unzip archive ..." ; sleep 2;
+    echo_purple "... start to unzip archive ..."; sleep 2;
+
+    # sudo apt install unzip
     unzip $zip_path -d $PWD
-    echo_green "Theme was created! ${theme_path}"
+    
+    echo_green "Theme was created! ${theme_path}\r\n"
   fi
 }
 

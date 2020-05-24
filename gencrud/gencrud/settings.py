@@ -9,7 +9,7 @@ from settings import SITE_DOMAIN, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 DEBUG = True
 
 # todo: generate custom key for a new install
-SECRET_KEY = 'hph53g@p+i@q0me76#v)+6p&(xcc!)@e=oi8oum)lo_bethany'
+SECRET_KEY = 'hph53g@p+i@q0me76#v)+6p&(xcc!)@e=oi8oum)lo_gencrud'
 
 
 PROTOCOL = 'https'

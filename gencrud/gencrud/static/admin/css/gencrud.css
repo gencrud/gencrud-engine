@@ -7,7 +7,10 @@ textarea, select, .vTextField, .button, input[type=submit], input[type=button], 
 input[type=text], textarea.vLargeTextField {
     width: 88%;
 }
-
+input.cke_dialog_ui_input_text, input.cke_dialog_ui_input_password, input.cke_dialog_ui_input_tel,
+textarea.cke_dialog_ui_input_textarea {
+    color: #000!important;
+}
 .add-row {
     text-align: center;
     text-shadow: unset!important;
@@ -32,6 +35,10 @@ input[type=text], textarea.vLargeTextField {
 
 .form-horizontal .inline-group .inline-related {
     border-bottom: 1px solid #3a3e40;
+}
+
+.cke_reset_all textarea, .cke_reset_all input[type="text"], .cke_reset_all input[type="password"] {
+    color: #000;
 }
 
 /* FOR JS */
