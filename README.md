@@ -8,7 +8,7 @@ The platform is easy to expand and customize, which will create a project of any
 
 ### Get started
 ```
-git clone https://github.com/marychev/gencrud.git
+git clone https://github.com/gencrud/gencrud.git
 cd gencrud
 . install.sh
 ```
