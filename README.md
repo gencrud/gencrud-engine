@@ -4,15 +4,23 @@ Gencrud is the platform for creating simple sites, corporate sites, internet-sho
 The platform is easy to expand and customize, which will create a project of any complexity.
 
 
-## Install and run project
-
-### Get started
+## Install for Ubuntu
 ```
 git clone https://github.com/gencrud/gencrud.git
 cd gencrud
 . install.sh
 ```
 Congratulations! Open browser - [localhost:8000](http://localhost:8000).
+
+
+## Install for Windows
+>*TODO: fix the description*
+>Install git
+>Install python
+>Install virtualenv, activate
+> Run migrations
+> run project
+
 
 ### Installation Description
 1. [Downolad](https://github.com/gencrud/gencrud) or [clone](https://github.com/gencrud/gencrud.git) a repo **gencrud**.
