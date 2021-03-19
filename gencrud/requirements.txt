@@ -25,7 +25,7 @@ django-simple-math-captcha==1.0.9
 django-compressor==2.3
 django-import-export==2.0.2
 
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 django-filter==2.2.0
 markdown==3.2.1
 
