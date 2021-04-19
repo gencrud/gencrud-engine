@@ -25,7 +25,7 @@ Congratulations! Open browser - [localhost:8000](http://localhost:8000).
 ### Installation Description
 1. [Downolad](https://github.com/gencrud/gencrud) or [clone](https://github.com/gencrud/gencrud.git) a repo **gencrud**.
 
-2. Open a console into the root `gencrud` and type `ll`. You must see the next structure folders and files:
+2. Open a console into the root (`gencrud`) and type `ll`. You must see the next structure folders and files:
 ```
 gencrud/
 .git/
@@ -53,6 +53,26 @@ This should take about a minute!
 + README.md
 + install.sh
 + .gitignore
+
+
+## Upgrade project
+*todo: fix description of this section*
+*todo: ssh_key copy from `general/gen/settings.py`*
+*todo: fix using DB `general/gen/settings_db.py`*
+
+The `upgrade.zip` archive must exist into the root.
+```
+cd <PROJECT_NAME>
+. gencrud/gencrud/sh/upgrade.sh -h  # check command
+. gencrud/gencrud/sh/upgrade.sh core
+```
+Next, fix `settings_db.sql`.
+```
+python gencrud/manage.py makemigrations
+python gencrud/manage.py collectstatic --noinput
+python gencrud/manage.py migrate
+```
+
 
 
 ### Useful comands:

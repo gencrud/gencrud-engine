@@ -69,8 +69,13 @@ function upgrade_gencrud_core() {
 
     echo_green "Upgade was finished!\n\r"; sleep 1;
 
-    # todo: create backup_db. After aplly this code
-    echo -e "# Next, create backup db! After aplly this commands\r"
+    # todo: create backup_db. After apply this code
+    echo -e "# Next, create backup db!\r"
+    echo_green "sudo -u postgres psql\r"
+    echo_green "postgres=# drop database <DBNAME>; create database <DBNAME>; \q;\r"
+    echo_green "psql -h localhost -U <USERNAME> -d <DBNAME> (-p 5433) -f <PROJECT_NAME>/theme/<DBFILE>.sql\n"
+
+    echo -e "# After aplly this commands\r"
     echo_green "python $RUNSERVER_PATH makemigrations\r"
     echo_green "python $RUNSERVER_PATH migrate\n"
   else
@@ -84,6 +89,6 @@ function __help_upgrade() {
   echo_purple "Run commands from the 'PROJECT_NAME' folder:\n"
 
   echo -e "# upgrade gencrud/gen, gencrud/gencrud folders and main files into the root\r"
-  echo_green ". gencrud/gencrud/sh/upgrade.sh engine\n"
+  echo_green ". gencrud/gencrud/sh/upgrade.sh core\n"
   echo -e "# -------------------------------------------------- #\n"
 }

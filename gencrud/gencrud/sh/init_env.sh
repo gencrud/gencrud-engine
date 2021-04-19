@@ -11,7 +11,7 @@ function init_env() {
 
   if test -d $ENV_PATH; then
     echo_purple "Environment $ENV_PATH exist!"
-    source $ENV_PATHh/bin/activate
+    source $ENV_PATH/bin/activate
   else
     echo_purple "... start to install environment ..." ; sleep 1;
 

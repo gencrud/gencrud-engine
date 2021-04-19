@@ -1,0 +1,9 @@
+﻿PROJECT_NAME = 'dev-gencrud'
+SITE_DOMAIN = 'dev.gencrud.com'
+EMAIL_HOST_USER = None
+EMAIL_HOST_PASSWORD = None
+DB_NAME = PROJECT_NAME
+DB_USER = DB_NAME
+DB_PASSWORD = '{}888'.format(DB_NAME)
+
+# TOOD: ????

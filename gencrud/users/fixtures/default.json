@@ -1,0 +1,1 @@
+[{"model": "users.userprofile", "pk": 1, "fields": {"user": 4, "avatar": "uploads/2020/3/bcdctxhrg0c_K1nS7d7.jpg", "patronymic": "333", "birthday": null, "phone": "89203697923", "address": "8", "about": "", "id_signed_news": false}}]

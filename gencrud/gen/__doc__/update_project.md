@@ -6,7 +6,7 @@ ssh -p 888 marychev@95.213.236.77
 
     cd /home/homebio/
     . venv/bin/activate
-    pg_dump -h localhost -U homebio homebio > theme/17042020_2.sql  
+    pg_dump -h localhost -U homebio homebio > theme/29052020.sql  
     # homebio888
     
     git add .
