@@ -1,4 +1,4 @@
-Django==2.2.10
+Django==2.2.27
 # !django-suit==0.2.25
 django-ckeditor==5.8.0
 django-mptt==0.10.0
