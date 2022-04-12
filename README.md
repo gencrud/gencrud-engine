@@ -102,3 +102,8 @@ python manage.py test
 * Django 2.2
 * Postgres, MySQL, SQLite
 * Bootstrap 4
+
+
+##### Versions
+* Version with suit-admin: 0.0.0
+* Version default admin: 1.0.0

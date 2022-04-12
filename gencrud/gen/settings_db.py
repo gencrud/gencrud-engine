@@ -1,6 +1,8 @@
 import sys
 from settings import DB_NAME, DB_USER, DB_PASSWORD
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # if DB_PASSWORD:
 #     # ------------
 #     # - postgres -

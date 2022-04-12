@@ -82,7 +82,7 @@ class BoolValueMixin(models.Model):
     class Meta:
         abstract = True
 
-    bool_value = models.NullBooleanField(max_length=255, verbose_name='Значение(булево)', blank=True, null=True)
+    bool_value = models.BooleanField(max_length=255, verbose_name='Значение(булево)', null=True)
 
     def clean(self):
         from param.models.param import Param

@@ -8,7 +8,6 @@ class AbstractImageInlineAdmin(admin.StackedInline):
 
     extra = 0
     show_change_link = True
-    suit_classes = 'suit-tab suit-tab-image'
     readonly_fields = ('thumb',)
 
     fields = (

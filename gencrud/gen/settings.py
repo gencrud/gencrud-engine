@@ -78,6 +78,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'get_include_area': 'gen.site_info.templatetags.get_include_area',
+                'staticfiles': 'django.templatetags.static',
             }
         },
 
@@ -136,7 +137,7 @@ CART_SESSION_ID = 'cart'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-LANGUAGE_CODE = 'ru-ru'
+# LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True

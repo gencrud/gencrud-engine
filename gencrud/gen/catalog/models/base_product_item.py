@@ -33,7 +33,7 @@ class BaseProductItemModel(AbstractCreatedModel):
     product = models.ForeignKey('catalog.Product', verbose_name=BASE_PRODUCT_VERBOSE_NAME, on_delete=models.CASCADE)
     name = models.CharField(max_length=512, verbose_name='Наименование')
     text = models.CharField(max_length=510, verbose_name='Дополнительно', blank=True, null=True)
-    unit = models.CharField(max_length=3, verbose_name='Ед.изм', choices=UNIT_CHOICES, default=PCS)
+    unit = models.CharField(max_length=12, verbose_name='Ед.изм', choices=UNIT_CHOICES, default=PCS)
     price = models.DecimalField(
         verbose_name='Цена', blank=True, null=True,
         max_digits=12, decimal_places=2, validators=[MinValueValidator(Decimal('0'))])

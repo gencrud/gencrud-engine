@@ -17,7 +17,7 @@ class BaseAdmin(CloneObjectMixin):
     save_on_top = True
 
     def get_html(self, obj):
-        return mark_safe('{}'.format(obj.html))  # [:300])
+        return mark_safe('{}'.format(obj.html))
     get_html.short_description = 'HTML'
 
     def clone_object(self, request, queryset):

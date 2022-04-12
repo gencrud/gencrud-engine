@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import authenticate, UsernameField
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import lazy as _
 from gen.users.models.base_user_profile import User
 
 

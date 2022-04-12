@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib import admin
-from daterange_filter.filter import DateRangeFilter
+# from daterange_filter.filter import DateRangeFilter
 from gen.abstract.admin.default import AbstractDefaultAdmin
 from order.models.story import Story
 

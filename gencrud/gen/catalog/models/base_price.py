@@ -19,6 +19,6 @@ class BasePriceModel(AbstractTitleModel):
         verbose_name='Цена', blank=True, null=True,
         max_digits=12, decimal_places=2, validators=[MinValueValidator(Decimal(0))])
     unit = models.CharField(
-        max_length=3, verbose_name='Ед.изм',
+        max_length=12, verbose_name='Ед.изм',
         choices=BaseProductItemModel.UNIT_CHOICES, default=BaseProductItemModel.PCS)
 

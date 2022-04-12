@@ -6,20 +6,6 @@ from .content import AbstractContentAdmin
 from .image import AbstractImageAdmin
 
 
-# def fields_element(fields):
-#     return ('Элементы объекта', {
-#         'classes': ('suit-tab', 'suit-tab-fields'),
-#         'fields': fields,
-#     })
-#
-#
-# def info_fieldsets_item(readonly_fields):
-#     return ('ИНФО', {
-#         'classes': ('suit-tab', 'suit-tab-info',),
-#         'fields': readonly_fields,
-#     })
-
-
 class AbstractPageSeoAdmin(AbstractDefaultAdmin, AbstractContentAdmin, AbstractSEOAdmin,
                            AbstractImageAdmin, AbstractCreatedAdmin):
     class Meta:
@@ -33,24 +19,6 @@ class AbstractPageSeoAdmin(AbstractDefaultAdmin, AbstractContentAdmin, AbstractS
     list_display_links = ('thumb', 'title',)
     list_editable = ('sort', 'is_show', 'is_allow_comments')
 
-    # fieldsets = (
-    #     AbstractContentAdmin.fields_element(),
-    #     ('Элементы объекта', {
-    #         'classes': ('suit-tab', 'suit-tab-fields'),
-    #         'fields': (None,),
-    #     }),
-    #     AbstractSEOAdmin.fields_element(),
-    #     info_fieldsets_item(readonly_fields),
-    # )
-    #
-    # suit_form_tabs = (
-    #     ('content', 'КОНТЕНТ'),
-    #     ('fields', 'ПОЛЯ'),
-    #     ('seo', 'СЕО'),
-    #     ('image', 'ФОТО'),
-    #     ('info', 'ИНФО'),
-    # )
-
 
 class AbstractMPTTPageSeoAdmin(MPTTModelAdmin, AbstractPageSeoAdmin):
     class Meta:
@@ -62,13 +30,6 @@ class AbstractMPTTPageSeoAdmin(MPTTModelAdmin, AbstractPageSeoAdmin):
     list_filter = ('parent',) + AbstractPageSeoAdmin.list_filter
     list_display = ('parent',) + AbstractPageSeoAdmin.list_display
     list_display_links = ('parent',) + AbstractPageSeoAdmin.list_display_links
-
-    # fieldsets = (
-    #     AbstractPageSeoAdmin.fieldsets[0],
-    #     fields_element(('parent',)),
-    #     AbstractPageSeoAdmin.fieldsets[2],
-    #     AbstractPageSeoAdmin.fieldsets[3],
-    # )
 
     def rebuild(self, request, queryset):
         self.model.objects.rebuild()
