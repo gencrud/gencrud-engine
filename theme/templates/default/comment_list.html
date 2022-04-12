@@ -1,0 +1,26 @@
+{% if comments.exists %}
+{% load fb_versions %}
+
+<h3>Комментарии:</h3>
+<ul class="list-unstyled">
+{% for comment in comments %}
+    <li class="media mb-4">
+        {% if comment.user and comment.user.userprofile and comment.user.userprofile.avatar and comment.user.userprofile.avatar.url %}
+            <img class="mr-3" src="{% version comment.user.userprofile.avatar 'admin_thumbnail' %}" alt="{{ comment.user }}'s Avatar">
+        {% endif %}
+        <div class="media-body">
+            <div class="mb-1">
+                <i class="mr-2">{{ comment.user }}</i>
+                <small class="text-muted">
+                    <i class="fa fa-clock-o"></i>
+                    <time itemprop="dateCreated" datetime="{{ comment.created|date:'Y-m-d H:i:s' }}">{{ comment.created|date:'D m, Y' }}</time>
+                </small>
+            </div>
+            {{ comment.text }}
+        </div>
+        {% empty %}
+        <p>Оставьте свой комментарий!</p>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

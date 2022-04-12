@@ -1,0 +1,27 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+
+        {# --- явно передаем список``breadcrumbs``--- #}
+        {% if breadcrumbs %}
+            {% for bread in breadcrumbs %}
+            <li class="breadcrumb-item">
+                <a href="{{ bread.url }}">{{ bread.title }}</a>
+            </li>
+            {% endfor %}
+        {% else %}
+            {# --- точная передача параметров список``tree`` и ``obj``--- #}
+            {% if tree %}
+                {% for parent in tree_list %}
+                <li class="breadcrumb-item">
+                    <a href="{{ parent.get_absolute_url }}">{{ parent.title }}</a>
+                </li>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+        <li class="breadcrumb-item active">
+            <a href="{{ obj.get_absolute_url }}" aria-current="page">{{ obj.title }}</a>
+        </li>
+    </ol>
+</nav>

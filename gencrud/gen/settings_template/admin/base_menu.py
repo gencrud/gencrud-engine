@@ -22,29 +22,3 @@ class BaseMenuAdmin(AbstractDefaultMPTTAdmin):
     list_display = ('name', 'parent', 'is_show', 'catalog', 'page', 'blog', 'sort')
     list_display_links = ('name', 'parent')
     list_editable = ('is_show', 'sort')
-
-    fieldsets = (
-        ('Основные настройки', {
-            'classes': ('suit-tab', 'suit-tab-data'),
-            'fields': (('name', 'is_show'),'parent', 'sort'),
-        }),
-        ('Каталог', {
-            'fields': ('catalog',),
-            'classes': ('suit-tab', 'suit-tab-catalog'),
-        }),
-        ('Блог', {
-            'fields': ('blog',),
-            'classes': ('suit-tab', 'suit-tab-blog'),
-        }),
-        ('Страницы', {
-            'fields': ('page',),
-            'classes': ('suit-tab', 'suit-tab-page'),
-        }),
-    )
-
-    suit_form_tabs = (
-        ('data', 'ДАННЫЕ'),
-        ('catalog', 'КАТАЛОГ'),
-        ('blog', 'БЛОГ'),
-        ('page', 'СТРАНИЦА'),
-    )

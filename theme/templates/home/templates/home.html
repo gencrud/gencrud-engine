@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load get_include_area %}
+
+{% block title %}{{ home.seo_title }}{% endblock %}
+{% block description %}{{ home.seo_description }}{% endblock %}
+{% block keywords %}{{ home.seo_keywords }}{% endblock %}
+
+{% block main %}
+    {% include 'home/templates/slider.html' %}
+
+    <section class="container mt-5 mb-3">
+        {% if not home.title %}{% include 'home/templates/first_step_run.html' %}
+        {% else %}<h1>{{ home.title }}</h1>{% endif %}
+        {% if home.description %}<p class="lead mb-5">{{ home.description|safe }}</p>{% endif %}
+
+        {% if home.html %}
+            <article class="row">
+            {% if home.video %}
+                <div class="col-lg-6 mb-4">
+                    <video controls="controls" loop muted autoplay class="d-block w-100">
+                        <source src="{{ home.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                    </video>
+                </div>
+                <div class="col-lg-6 html">{{ home.html|safe }}</div>
+            {% else %}
+                <div class="col-md-10 html">{{ home.html|safe }}</div>
+            {% endif %}
+            </article>
+        {% endif %}
+    </section>
+
+    {% get_include_area request code='advantages' %}
+
+    {% if home.get_images.exists %}
+    <section class="container mt-5 mb-5">
+        {% include 'default/images_list_carousel.html' with images=home.get_images %}
+    </section>
+    {% endif %}
+
+    {% if home.catalogs.exists %}
+    <section class="container mt-5 mb-3">
+        {% include 'catalog/templates/list_circle.html' with objects=home.catalogs.all %}
+    </section>
+    {% endif %}
+
+    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title='New' %}
+    {% get_include_area request code='counter' %}
+
+    {% if home.blog %}
+    <section class="container mt-5 mb-3">
+        <div class="card-group">
+            {% include 'default/cards_list_image_caps.html' with objects=posts hide_image=True %}
+        </div>
+    </section>
+    {% endif %}
+    {% include 'product/templates/item_bestseller_product.html' with objects=bestseller_products title='Top & Best' %}
+
+    {% if setting_template.phone %}
+    <section class="text-center mt-5 mb-3 w-100 jumbotron jumbotron-fluid">
+        <div class="row">
+            <div class="col">
+                <a class="display-4" href="tel:{{ setting_template.phone }}"><i class="fa fa-phone"></i> {{ setting_template.phone }}</a>
+                <p class="lead text-muted">Вы можете позвонить кликнув по номеру телефона</p>
+            </div>
+            <div class="col">
+                <p class="lead text-muted">Вы можете оформить свои пожелания в качесвте заявки или написать нам</p>
+                <button class="btn btn-lg btn-outline-primary" type="button" data-toggle="modal" data-target="#claim-modal">
+                    <i class="fa fa-bullhorn"></i>Оставить заявку или письмо</button>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% get_include_area request code='brands' %}
+
+{% endblock %}
+

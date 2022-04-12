@@ -1,5 +1,5 @@
 from django.contrib import admin
-from gen.abstract.admin import (AbstractPageSeoAdmin, AbstractImageInlineAdmin, fields_element)
+from gen.abstract.admin import (AbstractPageSeoAdmin, AbstractImageInlineAdmin)
 from home.models import (Home, HomeImage)
 from gen.home.strings import APP_NAME
 
@@ -15,13 +15,6 @@ class BaseHomeAdmin(AbstractPageSeoAdmin):
     raw_id_fields = AbstractPageSeoAdmin.raw_id_fields + ('blog',)
     list_filter = AbstractPageSeoAdmin.list_filter + ('blog',)
     filter_horizontal = ('catalogs',)
-
-    fieldsets = (
-        fields_element(('blog', 'catalogs', 'video')),              # fields
-        AbstractPageSeoAdmin.fieldsets[0],      # content
-        AbstractPageSeoAdmin.fieldsets[2],      # seo
-        AbstractPageSeoAdmin.fieldsets[3],      # info + ...inline
-    )
 
     def set_fixtures(self, request, queryset, dir_name=APP_NAME, filename='default.json'):
         super(BaseHomeAdmin, self).set_fixtures(request, queryset, dir_name)

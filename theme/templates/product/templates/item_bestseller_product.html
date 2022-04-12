@@ -1,0 +1,59 @@
+{% load static %}
+{% load thumbnail %}
+
+{% if objects %}
+<div class="{% if title %}mt-5 mb-5{% endif %} container">
+    {% if title %}
+        <p class="text-center"><strong>{% if title %}{{ title }}{% endif %}{{ object.title }}</strong></p>
+    {% endif %}
+    <div class="card-columns card-columns-4">
+        {% with objects=objects %}
+            {% for product in objects %}
+                <div class="card">
+                    <a class="p" href="{{ product.get_absolute_url }}">
+                        {% if product.get_main_image %}
+                        <img class="w-100" src="{{ product.get_main_image.image|thumbnail_url:'medium' }}" title="{{ product.get_main_image.image_title }}" alt="{{ product.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4 class="card-title" title="{{ product.title }}">{{ product.title|truncatechars:120 }}</h4>
+                            {% if product.articul %}<a href="{{ product.get_absolute_url }}" class='small text-muted'>{{ product.articul }}</a><br>{% endif %}
+                            {% if product.get_price %}{% include 'product/templates/product_price.html' with obj=product %}{% endif %}
+                        </div>
+                    </a>
+                    <ul class="text-center list-group list-group-flush small">
+                        <li class="list-group-item p-2 box-btn">
+                            <a href="#" data-toggle="modal" data-target="#product-claim-form-modal" data-product-pk="{{ product.pk }}">
+                                <i class="fa fa-bullhorn"></i> Заявка
+                            </a>
+                        </li>
+                    </ul>
+
+                    {% if product.get_price_discount %}
+                    <div class="ribbon sale">
+                        <div class="theribbon">%</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                    {% endif %}
+
+                    {% comment %}
+                    {% if product.is_new %}
+                    <div class="ribbon new">
+                        <div class="theribbon">NEW</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                    {% endif %}
+                    {% if product.is_bestseller %}
+                    <div class="ribbon gift">
+                        <div class="theribbon">TOP</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                    {% endif %}
+                    {% endcomment %}
+                </div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+</div>
+{#% --procces to JS include-- 'order/templates/product_form.html' with type="modal" title="Заявка на проект" % #}
+{% endif %}
+

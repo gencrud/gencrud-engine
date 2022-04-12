@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+
+{% block additional_css %}{% endblock %}
+
+{% block main %}
+<div class="container mt-5 mb-5">
+    <h1>Вход в личный кабинет</h1>
+    <div class="text-danger">{{ form.errors }}</div>
+    <form method="post" action="{% url 'user_login' %}" class="mt-4 mb-5">{% csrf_token %}
+        <p class="form-group">
+            <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            <input required class="form-control" name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}"  placeholder="{{ form.username.label }}" />
+            {{ form.username.errors }}
+        </p>
+        <p class="form-group">
+            <label for="{{ form.password.id_for_label }}">Пароль</label>
+            <input required class="form-control" type="password" name="{{ form.password.html_name }}" id="{{ form.password.id_for_label }}" placeholder="Password">
+            {{ form.username.errors }}
+        </p>
+        <p class="form-group mt-4">
+            <button type="submit" name="login" class='btn btn-primary btn-block'>
+                <i class="fa fa-user-md"></i> Войти</button>
+            <input type="hidden" name="next" value="{% url 'home' %}">
+        </p>
+        <p class="form-group mt-4">
+            <a id="button-pass" href="{% url 'password_reset' %}">Забыли пароль?</a> <br />
+            <a href="{% url 'user_register' %}">Регистрация</a>
+        </p>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block additional_js %}{% endblock %}

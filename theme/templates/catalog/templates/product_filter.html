@@ -1,0 +1,18 @@
+{% if filter %}
+<div class="panel panel-default sidebar-menu">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Фильтр
+            <a class="btn btn-xs btn-danger pull-right" href="{{object.get_absolute_url}}"><i class="fa fa-times-circle"></i>Сбросить</a>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <form method="get">
+            {% for item in filter.form %}
+                {{ item }}
+           {% endfor %}
+            <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i>Показать</button>
+        </form>
+    </div>
+</div>
+{% endif %}

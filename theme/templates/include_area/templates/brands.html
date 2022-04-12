@@ -1,0 +1,24 @@
+{% load static %}
+
+{% if include_areas.exists %}
+<section class="container mt-5">
+    <h3 class="h2">Технологии & Бренды</h3>
+    <hr />
+    <div class="row">
+        {% for area in include_areas %}
+            {% if area.code in 'brands' %}
+            <div class="col-lg-2 col-md-4-flex align-items-center">
+                {% if area.url %}<a href="{{ area.url }}">{% endif %}
+                    {% if area.image and area.image.url %}
+                    <img class="col" src="{{ area.image.url }}"
+                         title="{% if area.description %}{{ area.description }}{% else %}{{ area.image_title }}{% endif %}" alt="Brand image" />
+                    {% else %}
+                        <p class="lead border pt-1 pb-1 pr-2 pl-2" {% if area.description %}title="{{ area.description }}"{% endif %}>{{ area.title }}</p>
+                    {% endif %}
+                {% if area.url %}</a>{% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

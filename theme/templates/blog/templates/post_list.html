@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+
+{% block title %}{{ object.seo_title }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+{% block keywords %}{{ object.seo_keywords }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with tree=leftbar.obj.get_ancestors obj=object %}
+{% endblock %}
+
+{# -- {% block leftbar %} {% include 'default/leftbar.html' with fancybox=object.get_images %}{% endblock %} -- #}
+
+{% block main %}
+<div class="container">
+    <article>
+        <h1 class="display-4">{{ object.title }}</h1>
+        {% if object.description  %}<p class="lead mb-4">{{ object.description|safe }}</p><br />{% endif %}
+        {% if objects %}{% include 'default/pagination.html' %}{% endif %}
+        <section class="mt-5 mb-5">{% include 'default/cards_list_image_caps.html' with objects=objects %}</section>
+        {% if object.html %}<div class="content html">{{ object.html|safe }}</div>{% endif %}
+        {% include 'default/recursetree_list.html' with objects=leftbar.obj_list %}
+    </article>
+</div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}

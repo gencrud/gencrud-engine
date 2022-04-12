@@ -13,37 +13,6 @@ class BaseSettingsTemplateAdmin(AbstractDefaultAdmin, AbstractImageAdmin):
     list_display_links = ('title', 'thumb',)
     list_editable = ('is_included',)
 
-    fieldsets = (
-        ('Основные данные и настройки сайта', {
-            'classes': ('suit-tab', 'suit-tab-data'),
-            'fields': ('title', 'is_included', 'site', 'email', 'phone', 'address', 'logo'),
-        }),
-        ('Подключение элементов к шаблону', {
-            'fields': ('home', 'footer'),
-            'classes': ('suit-tab', 'suit-tab-include'),
-        }),
-        ('Сео и МЕТА настройки', {
-            'fields': ('robots_txt', 'meta'),
-            'classes': ('suit-tab', 'suit-tab-meta'),
-        }),
-        ('Скрипты JavaScripts', {
-            'fields': ('scripts',),
-            'classes': ('suit-tab', 'suit-tab-scripts'),
-        }),
-        ('Прочие данные', {
-            'fields': ('terms_of_use',),
-            'classes': ('suit-tab', 'suit-tab-terms'),
-        }),
-    )
-
-    suit_form_tabs = (
-        ('data', 'ДАННЫЕ САЙТА'),
-        ('include', 'ПОДКЛЮЧЕНИЕ'),
-        ('meta', 'CEO/META'),
-        ('scripts', 'СКРИПТЫ'),
-        ('terms', 'ПРОЧЕЕ'),
-    )
-
     def clone_object(self, request, queryset): pass
     clone_object.short_description = 'Клонировать: недоступно!'
 

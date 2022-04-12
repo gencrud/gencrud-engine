@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load fb_versions %}
+
+{% block title %}Мои Отзывы{% endblock %}
+{% block description %}Мои Отзывы{% endblock %}
+{% block keywords %}Мои Отзывы{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Настройки аккаунта' %}{% endblock %}
+{% block leftbar %}{% include 'users/templates/left_panel.html' %}{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1>Мои Отзывы <span class="badge">{{ review_products|length }}</span></h1>
+    <table class="col table table-responsive">
+        <thead><tr>
+            <th>Товар</th>
+            <th>Отзыв</th>
+            <th>Дата</th>
+            <th>#</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% with reviews=review_products %}
+            {% for review in reviews %}
+                <tr class="spaceUnder">
+                    <td>
+                        <a href="{{ review.product.get_absolute_url }}">
+                            {% if review.product.get_main_image and review.product.get_main_image.image and review.product.get_main_image.image.url %}
+                            <img src="{% version review.product.get_main_image.image 'admin_thumbnail' %}" alt="{{ review.product.title }}" />
+                            {% endif %}
+                            <p class='small'>{{ review.product.title }}<br>
+                            <small class='text-muted'>[Арткул: {{ review.product.articul }}]</small>
+                        </a>
+                    </td>
+                    <td>{{ review.text }}</td>
+                    <td class='small'>{{ review.created }}</td>
+                    <td>{% if review.is_show %}Опубликован{% else %}...проходит модерацию{% endif %}</td>
+                </tr>
+            {% empty %}
+                <p> <span class="info-text">Отзывов пока нет.</span></p>
+            {% endfor %}
+        {% endwith %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+
+
+{% comment %}
+{% if reviews %} {% with reviews=product.reviewproduct_set.all %} {% for review in reviews %}
+    <div class='content'>
+        <p class='col-md-2'>
+            <input class="form-control input-sm" disabled value="{{ review.username }}">
+        </p>
+        <p class='col-md-8'>
+            <i>..{{ review.text }}</i>
+        </p>
+        <p class=''>
+            <small>{{ review.created }}</small>
+        </p>
+    </div>
+<hr> {% endfor %} {% endwith %} {% else %} 55 {% endif %}
+{% endcomment %}
+    

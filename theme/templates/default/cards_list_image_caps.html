@@ -1,0 +1,21 @@
+{% if objects %}
+    {% for post in objects %}
+    <div>
+        {% if hide_image != True and post.get_main_image.image and post.get_main_image.image.url %}
+            <div style="max-height: 240px; overflow: hidden">
+                <img class="card-img-top" src="{{ post.get_main_image.image.url }}"
+                 title="{{ post.get_main_image.image_title }}" alt="Post image {{post.pk}}" />
+            </div>
+        {% endif %}
+            <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+            <p class="small text-muted">
+                {% if post.author %}<span>Автор: <b>{{ post.author.get_short_name }}</b>.</span>{% endif %}
+                <span>Опубликовано: <time datetime="{{ post.updated }}">{{ post.updated|date:'m D, Y' }}</time>.</span>
+                {% if post.comment_count > 0 %}<span>Коментарии: {{ post.comment_count }} шт.</span>{% endif %}
+            </p>
+        {% if post.description %}<p class="card-text">{{ post.description|safe }}{% else %}{{ post.html|striptags|truncatechars:240 }}</p>{% endif %}
+        {% if post.get_absolute_url %}<p><a href="{{ post.get_absolute_url }}" class="">Подробнее</a></p>{% endif %}
+        <hr class="mt-5 mb-5" />
+    </div>
+    {% endfor %}
+{% endif %}

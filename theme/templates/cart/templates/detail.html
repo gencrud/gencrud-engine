@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% load fb_versions %}
+{% load static %}
+{% load rupluralize %}
+
+{% block title %}Корзина{% endblock %}
+{% block description %}Корзина{% endblock %}
+{% block keywords %}Корзина{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Корзина' %}{% endblock %}
+
+{% block main %}
+<div class="container mb-4">
+    {% if not cart|length %}<p class='display-3 text-center'>Ваша корзина пуста :( </p>
+    {% else %}
+        <h1>Корзина</h1>
+        <form action="" method="post" id="editCartForm">{% csrf_token %}
+            {% include 'cart/templates/table.html' with is_update=True %}
+        </form>
+        <br />
+        <div class="mb-4">
+            <a href="{% url 'home' %}" class='btn btn-warning pull-left'><i class="fa fa-chevron-left"></i>
+                Продолжить покупки</a>
+            <a href="{% url 'order-create' %}" class="btn btn-primary text-right" type="submit">Оформить заказ
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </div>
+    {% endif %}
+    {% include 'cart/templates/warning_authenticate.html' with className='lead text-center' %}
+</div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}

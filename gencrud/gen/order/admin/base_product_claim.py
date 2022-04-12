@@ -16,22 +16,6 @@ class BaseProductClaimAdmin(AbstractDefaultAdmin, AbstractCreatedAdmin):
     filter_horizontal = ('product_items', )
     readonly_fields = ('id',) + AbstractCreatedAdmin.readonly_fields
 
-    fieldsets = (
-        ('Основные данные', {
-            'classes': ('suit-tab', 'suit-tab-data'),
-            'fields': (
-                ('id', 'status'), 
-                'product', 'product_items',
-                'user', 'email', 'phone', 'comment',
-                'created', 'updated',
-            )
-        }),
-    )
-
-    suit_form_tabs = (
-        ('data', 'ДАННЫЕ'),
-    )
-
     def go_print(self, request, queryset):
         """
         Создать табличный вид объекта и выставить на печать

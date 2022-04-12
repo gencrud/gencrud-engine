@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from django.urls import path
+from django.urls import path, include
+from django.contrib import admin
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView
+from filebrowser.sites import site as filebrowser_site
 
 from gen.api.urls import urlpatterns as api_urlpatterns
 from gen.blog.strings import APP_NAME as BLOG_APP
@@ -13,10 +16,20 @@ from gen.page.strings import APP_NAME as PAGE_APP
 from gen.search.strings import APP_NAME as SEARCH_APP
 from gen.seo.init import sitemaps
 from gen.seo.views import robots_txt
-from gen.suit.urls import urlpatterns as admin_urlpatterns
 from gen.task.strings import NAME_APP as TASK_APP
 from gen.users.strings import APP_NAME as USERS_APP
 from gen.utils.url import url_format, include_urls
+
+
+admin_urlpatterns = [
+    path('admin/filebrowser/', filebrowser_site.urls),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('django.contrib.auth.urls')),
+    path('admin/password_reset/', PasswordResetView.as_view(), name='admin_password_reset'),
+    path('admin/password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+]
 
 
 urlpatterns = api_urlpatterns + admin_urlpatterns + [

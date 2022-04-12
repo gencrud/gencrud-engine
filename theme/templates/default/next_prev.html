@@ -1,0 +1,16 @@
+<nav aria-label="Page pager">
+    <ul class="pagination">
+        <li class="page-item {% if not next_prev.prev %} disabled{% endif %}">
+            <a class="pt-0 page-link" href="{{ next_prev.prev.get_absolute_url }}">
+                <span class="h3">&larr;</span>
+                {{ next_prev.prev.title|truncatechars:88 }}
+            </a>
+        </li>
+        <li class="page-item {% if not next_prev.next %} disabled {% endif %}">
+            <a class="pt-0 page-link" href="{{ next_prev.next.get_absolute_url }}">
+                {{ next_prev.next.title|truncatechars:88 }}
+                <span class="h3">&rarr;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

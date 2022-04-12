@@ -1,0 +1,15 @@
+<div class="col-md-3 border-left">
+    <h5>
+        <a href="{% url 'profile' %}">
+        <i class="fa fa-cogs" aria-hidden="true"></i> Настройки аккаунта</a>
+    </h5>
+    <nav class="nav flex-column">
+        <a class="nav-link {% if current_url == '/users/orders/' %} active font-weight-bold {% endif %}" href="{% url 'user_orders' %}">
+            <i class="fa fa-folder-open" aria-hidden="true"></i> Мои заказы
+        </a>
+        <a class="nav-link {% if current_url == '/users/review/products/' %} active font-weight-bold {% endif %}" href="{% url 'user_review_products' %}">
+            <i class="fa fa-credit-card" aria-hidden="true"></i> Мои Отзывы
+        </a>
+        <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a>
+    </nav>
+</div>

@@ -1,0 +1,19 @@
+{% load static %}
+{% load thumbnail %}
+
+
+{% if include_areas.exists %}
+<!-- ======= Counts Section ======= -->
+<section id="counts" class="counts">
+    <div class="container">
+        <div class="row counters">
+            {% for area in include_areas %}
+            <div class="col-lg-3 col-6 text-center">
+                <span data-toggle="counter-up">{{ area.title }}</span>
+                <p>{{ area.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section><!-- End Counts Section -->
+{% endif %}

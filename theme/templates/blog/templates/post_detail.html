@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load url_handler %}
+
+{% load fb_versions %}
+
+{% block title %}{{ post.seo_title }}{% endblock %}
+{% block description %}{{ post.seo_description }}{% endblock %}
+{% block keywords %}{{ post.seo_keywords }}{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with tree=post.blog.get_family obj=post %}{% endblock %}
+
+{% block main %}
+<div class="container">
+    <article class="mt-4 mb-5">
+        <h1 class="display-4">{{ post.title }}</h1>
+        {% if post.description %}<p class="lead mb-2">{{ post.description|safe }}</p>{% endif %}
+        {% if post.get_images.exists %}
+            <section class="container-fluid">
+                {% include 'default/images_list_carousel.html' with images=post.get_images %}
+            </section>
+        {% endif %}
+        <div class="col html mt-5">{{ post.html|safe }}</div>
+    </article>
+
+    <p class="small text-right text-muted mb-5">
+        {% if post.author %}<span>Автор: <b>{{ post.author.get_short_name }}</b>.</span>{% endif %}
+        <span>Опубликовано: <time datetime="{{ post.updated }}">{{ post.updated|date:'m D, Y' }}</time>.</span>
+        {% if post.comment_count > 0 %}<span>Коментарии: {{ post.comment_count }} шт.</span>{% endif %}
+    </p>
+
+    <section class="mt-4 mb-5">{% include 'default/next_prev.html' %}</section>
+    <section class="mt-4 mb-5">
+        <div class="row">
+            {% if post.is_allow_comments %}
+                <div class="col">{% include 'default/form_comment.html' with type='post' %}</div>
+            {% endif %}
+            <div class="col-lg-8 col-md-6">{% include 'default/comment_list.html' with comments=comments %}</div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

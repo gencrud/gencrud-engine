@@ -37,14 +37,6 @@ class BaseCatalogAdmin(ImportExportModelAdmin, AbstractMPTTPageSeoAdmin):
     inlines = (CatalogImageInline,)
     actions = AbstractMPTTPageSeoAdmin.actions + ('set_fixtures', 'load_fixtures')
 
-    fieldsets = (
-        # fields_element(('parent',)),
-        AbstractMPTTPageSeoAdmin.fieldsets[0],
-        AbstractMPTTPageSeoAdmin.fieldsets[1],
-        AbstractMPTTPageSeoAdmin.fieldsets[2],
-        AbstractMPTTPageSeoAdmin.fieldsets[3],
-    )
-
     def set_fixtures(self, request, queryset, dir_name=APP_NAME, filename='default.json'):
         super(BaseCatalogAdmin, self).set_fixtures(request, queryset, dir_name)
     set_fixtures.short_description = '[не применять] Фикстуры: Сохранить текущие'

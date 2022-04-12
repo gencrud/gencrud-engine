@@ -1,0 +1,72 @@
+<h1>Gencrud - это платформа для создания веб-проектов, корпоративных-сайтов, интернет-магазинов.</h1>
+
+<p>Заполните <a href="#general-settings-site"><strong>основные настройки</strong></a>&nbsp;сайта, чтобы&nbsp;увидеть главную страницу и начать работу с проектом. В дальнейшем вы сможете создавать товары, страницы и другие объекты сайта. Также вы можете ознакомиться со <a href="#structure-project">структурой сайта</a> после первоначальной установки. Больше информации вы сможете найти на сайте <a href="https://gencrud.com" target="_blank">https://gencrud.com</a>.</p>
+
+<p>&nbsp;</p>
+
+<h2><a id="general-settings-site" name="general-settings-site">Первый запуск.&nbsp;Основные настройки проекта.</a></h2>
+
+<p><strong>1. Войдите в <a href="/admin/" target="_blank">админку</a>.</strong><br />
+Демонстрационные&nbsp;<em>login</em>&nbsp;и <em>password:</em>&nbsp;<code>admin gencruduser.</code></p>
+
+<p><strong>2. Создайте&nbsp;<a href="/admin/home/home/add/" target="_blank">главную страницу</a>.</strong><br />
+Для начала, достаточно заполнить только <em>заголовок</em>.</p>
+
+<p><strong>3. Создайте &nbsp;<a href="/admin/settings_template/settingstemplate/add/" target="_blank">Настройку&nbsp;шаблона</a>.</strong><br />
+Подключите созданную ранее главную страницу<strong>.</strong><br />
+Напротив поля&nbsp;<em>Включена</em>&nbsp;должна стоять галочка <input checked="checked" type="checkbox" />.</p>
+
+<p>&nbsp;</p>
+
+<h3><a id="structure-project" name="structure-project">Первый запуск. Структура проекта.</a></h3>
+
+<div class="small"><strong>[project_name] /</strong>
+
+<ul>
+    <li>app /
+    <ul>
+        <li>static</li>
+    </ul>
+    </li>
+    <li>gencrud /
+    <ul>
+        <li>gen</li>
+        <li>gencrud</li>
+        <li>manage.py</li>
+        <li>settings.py</li>
+        <li>...</li>
+    </ul>
+    </li>
+    <li>theme /
+    <ul>
+        <li>media</li>
+        <li>templates</li>
+        <li><code>[project_name]</code>.db</li>
+    </ul>
+    </li>
+    <li>venv /
+    <ul>
+        <li>bin</li>
+        <li>include</li>
+        <li>...</li>
+    </ul>
+    </li>
+</ul>
+
+<p>&nbsp;</p>
+</div>
+
+<!-- Alert 
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h5><b>Поздавляем!</b> Установка завершена!</h5>
+    <ul>
+        <li>Создан раздел <b>app</b> для статических файлов (css, js, images): <code class="small text-dark">/[project_name]/app/</code></li>
+        <li>Создан раздел <b>theme</b>. Файлы темы, медаи-файлы, временные файлы (html, images, tmp):</li>
+        <li>Создана База данных <code>sqlite</code>: <code class="small text-muted">/[project_name]/theme/[project_name].db</code></li>
+        <li>Создано виртуальное окружение <b>venv</b>: <code class="small text-dark">/[project_name]/venv/</code></li>
+    </ul>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> 
+--- END Alert -->

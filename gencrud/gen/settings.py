@@ -3,7 +3,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GENCRUD_LIBS = [
-    'gen.suit',
     'filebrowser',
     'django.contrib.admin',
     'django.contrib.sites',

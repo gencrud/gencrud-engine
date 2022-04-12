@@ -7,7 +7,7 @@ from catalog.models import Product, ProductImage, ProductItem, ProductParam
 from gen.abstract.mixins.clone import CloneObjectMixin
 from gen.abstract.admin import (
     AbstractImageInlineAdmin, AbstractPageSeoAdmin, AbstractDefaultStackedInlineAdmin,
-    AbstractDefaultTabularInlineAdmin, fields_element)
+    AbstractDefaultTabularInlineAdmin)
 
 
 class ProductResource(resources.ModelResource):
@@ -71,31 +71,6 @@ class BaseProductAdmin(AbstractPageSeoAdmin, ImportExportModelAdmin):
     list_display = AbstractPageSeoAdmin.list_display + ('is_bestseller', 'is_new', 'articul')
     list_display_links = AbstractPageSeoAdmin.list_display_links + ('articul', )
     list_editable = AbstractPageSeoAdmin.list_editable + ('is_bestseller', 'is_new')
-
-    fieldsets = (
-        fields_element(
-            (
-                'catalogs',
-                'articul',
-                'is_bestseller', 'is_new',
-                'recommend_products',
-                'layout'
-             )
-        ),
-        AbstractPageSeoAdmin.fieldsets[0],
-        AbstractPageSeoAdmin.fieldsets[2],
-        AbstractPageSeoAdmin.fieldsets[3],
-    )
-
-    suit_form_tabs = (
-        ('content', 'КОНТЕНТ'),
-        ('price', 'ЦЕНЫ/ВАРИАНТЫ ТОВАРА'),
-        ('fields', 'ПОЛЯ'),
-        ('param', 'ПАРАМЕТРЫ'),
-        ('seo', 'СЕО'),
-        ('image', 'ФОТО'),
-        ('info', 'ИНФО'),
-    )
 
     def get_price(self, obj):
         return obj.get_price()

@@ -1,0 +1,27 @@
+{% load static %}
+{% load thumbnail %}
+
+{% comment %}
+{{ area.html_code|safe }}
+{% for area in include_areas %}
+{% endcomment %}
+
+{% if include_areas.exists %}
+
+<section class="container mt-5 mb-5">
+    <hr />
+    <div class="row">
+        {% for area in include_areas %}
+            {% if area.code in 'advantages' %}
+            <div class="col-lg-4 col pt-3 pb-3">
+                {% if area.image %}<img src="{{ area.image|thumbnail_url:'medium' }}" alt="Advantage image #{{ area.pk }}" />{% endif %}
+                <h4 class="h5">{{ area.title }}</h4>
+                {% if area.description %}<small>{{ area.description|safe }}</small>{% endif %}
+                {% if area.url %}<a href="{{ area.url }}">Подробнее</a>{% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <hr />
+</section>
+{% endif %}

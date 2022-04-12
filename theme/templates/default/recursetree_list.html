@@ -1,0 +1,16 @@
+{% load staticfiles %}
+{% load mptt_tags %}
+
+<section class="mt-5 container">
+    <strong>Все разделы:</strong>
+    <ol class="small">
+        {% recursetree leftbar.obj_list %}
+            <li class='{% if not node.is_leaf_node %}has-sub parent{% endif %}{% if leftbar.obj.title == node.title %} active{% endif %}'>
+                <a href="{{ node.get_absolute_url }}"> {{ node.title }} </a>
+                {% if not node.is_leaf_node %}
+                    <ol class="children{{ node.is_child_node }}">{{ children }}</ol>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+    </ol>
+</section>

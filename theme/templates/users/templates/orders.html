@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %}Мои заказы{% endblock %}
+{% block description %}Мои заказы{% endblock %}
+{% block keywords %}Мои заказы{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Настройки аккаунта' %}{% endblock %}
+{% block leftbar %}{% include 'users/templates/left_panel.html' %}{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1>Мои заказы <span class="badge">{{ orders|length }}</span></h1>
+    <table class="col table table-responsive table-hover">
+        <thead><tr>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Статус</th>
+            <th>Сумма</th>
+            <th>Подробнее</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% with order_list=orders %}
+        {% for order in order_list %}
+            <tr class="spaceUnder">
+                <td>{{ order.pk }}</td>
+                <td>{{ order.created }}</td>
+                <td>{% if order.status %}{{ order.status }}{% else %} - {% endif %}</td>
+                <td>{{ order.total_cost }} <i class="small fa fa-rub" aria-hidden="true"></i></td>
+                <td><a href="{% url 'user_order_detail' order.pk %}">Подробнее</a></td>
+            </tr>
+        {% empty %}
+            <p class="">Заказов пока не было :(</p>
+        {% endfor %}
+        {% endwith %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+
+
+
+

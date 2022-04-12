@@ -1,0 +1,14 @@
+{% if 'page' in type %}
+<form id="comment-form" method="post" action="{% url 'page_comment' object.id %}">{% csrf_token %}
+{% elif 'post' in type %}
+<form method="post" action="">{% csrf_token %}
+{% else %}
+<form method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
+{% endif %}
+    <fieldset>
+        <legend>Ваш комментарий</legend>
+        <div class='alert-danger'>{{ comment_form.errors }}</div>
+        {{ comment_form.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-block btn-dark"><i class="fa fa-comment-o"></i> Оставить коментарий</button>
+</form>

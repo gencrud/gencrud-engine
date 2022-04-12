@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+
+{% block content %}
+    {% block header %}{% include 'default/header.html' %}{% endblock %}
+    {% block breadcrumbs %}{% endblock %}
+    <main role="main" class="container-fluid pb-5">
+        <div class="row">
+            {% block main %}{% endblock %}
+            {% block leftbar %}{% endblock %}
+        </div>
+    </main>
+    {% block footer %}{% include 'default/footer.html' %}{% endblock %}
+{% endblock %}
+
+
+

@@ -1,0 +1,21 @@
+{% load thumbnail %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible fade show w-100 text-center" role="alert" style="position:fixed; z-index:10">
+            <strong>Оповещение!</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<header>
+    {% include 'menu/templates/mainmenu.html' %}
+    <input hidden
+           id="profileData"
+           data-profile-phone="{{ profile.phone }}"
+           data-user-id="{{ request.user.id }}"
+           data-user-email="{{ request.user.email }}" />
+</header>

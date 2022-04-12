@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load thumbnail %}
+
+{% block title %}{{ object.seo_title }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+{% block keywords %}{{ object.seo_keywords }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with tree=object.get_ancestors obj=object %}
+{% endblock %}
+
+{# -- {% block leftbar %}  {% include 'default/leftbar.html' with fancybox=object.get_images %} {% endblock %} -- #}
+
+{% block main %}
+<div class="container">
+    <div class="mb-5">
+        <h1 class="display-4">{{ object.title }}</h1>
+        {% if object.description %}<p class="lead mb-4">{{ object.description }}</p>{% endif %}
+
+        {% include 'catalog/templates/list_circle.html' with objects=object.get_descendants %}
+
+        {# % include 'catalog/templates/item_product_list.html' % #}
+        {# % include 'catalog/templates/catalog_sort_row.html' % #}
+
+        {% include 'product/templates/item_bestseller_product.html' %}
+        {% include 'default/pagination.html' %}
+        {% if object.html %}<div class="container mt-5">{{ object.html|safe }}</div><hr>{% endif %}
+        {% include 'default/recursetree_list.html' with objects=leftbar.obj_list %}
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-fancybox="sidebar-images"]').fancybox();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% if obj.price_discount > 0 %}
+    <span class='text-muted'>Цена:</span>
+    <span class='text-danger'>
+        <span>{{ obj.price_discount }}</span>
+        <i class="fa fa-rub" aria-hidden="true"></i>
+    </span>
+    {% if obj.price %}
+    <b class='text-muted discount_price'>
+        {{ obj.price }}
+        <i class="fa fa-rub" aria-hidden="true"></i>
+    </b>
+    {% endif %}
+{% elif obj.price %}
+    <span class='text-muted'>Цена:</span>
+    <b class='text-danger'>
+        {{ obj.price }}
+        <i class="fa fa-rub" aria-hidden="true"></i>
+    </b>
+{% endif %}

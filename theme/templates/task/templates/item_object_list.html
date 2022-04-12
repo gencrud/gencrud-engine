@@ -1,0 +1,28 @@
+{% load static %}
+{% load fb_versions %}
+
+<div class="row">
+{% with object_list=objects %}
+    {% for obj in object_list %}
+{#                <figure class="gallery-item">#}
+{#                    <div class="gallery-icon landscape">#}
+{#                        <a href="{% version obj.image 'max' %}">#}
+{#                            <img width="370" height="247" src="{% version obj.image 'medium' %}" class="attachment-thumbnail size-thumbnail" title="{{ obj.title }}" alt="{{ obj.title }}">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </figure>#}
+      <div class="col-md-6">
+        <div class="thumbnail">
+            <a href="{% version obj.image 'large' %}">
+                <img src="{% version obj.image 'large' %}" class="attachment-thumbnail size-thumbnail" title="{{ obj.image_title }}" alt="{{ obj.image_title }}">
+            </a>
+          <div class="caption">
+            <h3>{{ obj.image_title }}</h3>
+            {% if obj.image_title %}<p>{{ obj.image_description }}</p>{% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+{% endwith %}
+
+</div>

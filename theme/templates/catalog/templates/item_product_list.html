@@ -1,0 +1,23 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="card-columns">
+{% for cat in object.get_family %}
+    {% if cat.pk != object.pk and cat.is_show %}
+    {% for catpr in cat.product_set.all %}
+    <div class="card">
+        {% if catpr.is_show and catpr.get_main_image %}
+        <a href="{{ catpr.get_absolute_url }}">
+            <img src="{{ catpr.get_main_image|thumbnail_url:'medium' }}" class="card-img-top" alt="{{ catpr.get_main_image.image_title }}">
+        </a>
+        {% endif %}
+        <div class="card-body">
+            <h6 class="card-title">{{ catpr.title|truncatechars:55 }}</h6>
+            {% if catpr.get_price %}{% include 'product/templates/product_price.html' with obj=catpr %}{% endif %}
+            <p class="card-text text-right"><a href="{{ cat.get_absolute_url }}" class="text-muted small"># {{ cat.title }}</a></p>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+{% endfor %}
+</div>

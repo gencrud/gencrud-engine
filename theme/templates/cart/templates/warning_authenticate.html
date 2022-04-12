@@ -1,0 +1,7 @@
+{% if not request.user.is_authenticated %}
+<p class="text-muted {{ className }}">
+    <i class="fa fa-exclamation-triangle text-warning"></i>
+    <span>Вы должны <a href="{% url 'user_login' %}">Войти</a> или <a href="{% url 'user_register' %}">Зарегистрироваться</a>,
+        чтобы использовать <a href="{% url 'cart_detail' %}">корзину</a>.</span>
+</p>
+{% endif %}

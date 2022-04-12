@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block title %}Спасибо за заказ{% endblock %}
+{% block description %}Спасибо за заказ{% endblock %}
+{% block keywords %}Спасибо за заказ{% endblock %}
+
+{% block main %}
+    <div class="mt-4 mb-4 col-8 offset-2">
+        <div class="box">
+            <h1 class="display-3">Заказ оформлен!</h1>
+            <h3>Номер вашего заказа: <b># {{ pk }}</b></h3>
+        <a class='btn btn-primary' href="{% url 'user_order_detail' pk %}">Перейти к заказу</a>
+    </div>
+</div>
+
+{% endblock %}

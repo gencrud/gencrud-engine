@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load url_handler %}
+{% load fb_versions %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block description %}{{ title }}{% endblock %}
+{% block keywords %}{{ title }}{% endblock %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}" type="text/css" media="all">
+{% endblock %}
+
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=title %}{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="h2">Поиск по запросу: <i class="h1">"{{ request.GET.q }}"</i>.</h1>
+        {% for model_obj in objects %}
+            <p class="small">...</p>
+            {% for obj in model_obj %}
+                <div class="card mb-5">
+                    {% if obj.get_main_image.image and obj.get_main_image.image.url %}
+                        <img src="{% version obj.get_main_image.image 'small' %}" title="{{ obj.get_main_image.image_title }}" alt="Image {{ obj.title }}" />
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                        {% if obj.description %}<p class="card-text">{{ obj.description|safe }}</p>{% endif %}
+                        {% if obj.get_price %}<p class="ard-text">{{ obj.get_price_format }}</p>{% endif %}
+                        <a class="btn btn-outline-primary" href="{{ obj.get_absolute_url }}">Подробнее</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% empty %}
+            <h3 class="display-4"> По вашему запросу <i>{{ request.GET.q }}</i> ничего не найдено.</h3>
+        {% endfor %}
+    </div>
+{% endblock %}

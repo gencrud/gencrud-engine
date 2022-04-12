@@ -1,0 +1,7 @@
+<a class="nav-link" href="{% url 'cart_detail' %}" title="Card">
+    <b class="fa fa-shopping-cart"></b>
+    <span class="small"><span>{{ cart|length }}</span>/<span>{{ cart.0.totalCountProductItems }}</span></span>
+    <span class="small text-muted">
+        <small>{{ cart.0.totalPrice }}</small>
+    </span>
+</a>

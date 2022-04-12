@@ -1,5 +1,5 @@
 from django.contrib import admin
-from gen.abstract.admin import AbstractPageSeoAdmin, AbstractImageInlineAdmin, fields_element
+from gen.abstract.admin import AbstractPageSeoAdmin, AbstractImageInlineAdmin
 from blog.models import Post, PostImage
 
 
@@ -17,9 +17,3 @@ class BasePostAdmin(AbstractPageSeoAdmin):
     list_display = ('blog',) + AbstractPageSeoAdmin.list_display
     list_display_links = AbstractPageSeoAdmin.list_display_links
 
-    fieldsets = (
-        fields_element(('blog', 'comment_count')),
-        AbstractPageSeoAdmin.fieldsets[0],
-        AbstractPageSeoAdmin.fieldsets[2],
-        AbstractPageSeoAdmin.fieldsets[3],
-    )

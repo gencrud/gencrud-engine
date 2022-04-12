@@ -1,0 +1,5 @@
+<form class="form-inline" action="{% url 'search_main' %}" method="get" accept-charset="utf-8" role="search">
+    <input class="form-control col" type="search" aria-label="Search"
+           id="searchbox" name="q" placeholder=":Поиск" {% if q %}value="{{ q }}"{% endif %}/>
+    <button class="btn btn-outline-info col-3" type="submit">Поиск</button>
+</form>

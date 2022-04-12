@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{#{% load thumbnail %}#}
+
+{% block title %}Заказ № {{ pk }}{% endblock %}
+{% block description %}Заказ № {{ pk }}{% endblock %}
+{% block keywords %}Заказ № {{ pk }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Настройки аккаунта' %}{% endblock %}
+{% block leftbar %}{% include 'users/templates/left_panel.html' %}{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="col">
+            <h1>Заказ № {{ pk }} <span class="badge">{{ order.created }}</span></h1>
+            {% include 'cart/templates/table.html' with is_update=False cart=None order=order %}
+            {% if order.ttn %}
+                <p><span class='text-muted'>Товарно-транспортная накладная:</span> {{ order.ttn }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+
+
+
+

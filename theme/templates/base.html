@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png" />
+
+    <link rel="canonical" href="https://{{ setting_template.site }}{{ request.get_full_path }}" />
+    <meta name="robots" content="index, follow">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    {% if setting_template.meta %}{{ setting_template.meta|safe }}{% endif %}
+    {% block additional_css %}{% endblock %}
+</head>
+<body>
+    {% if user.is_staff %}<a target="_blank" href="/admin" style="position: fixed; color: #D1A054; top:1px; padding: 5px 10px; font-size: 10px; z-index: 30; border: 1px solid #D1A054;">A</a>{% endif %}
+
+    {% block content %}{% endblock %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fancybox/index.css' %}">
+    <script src="{% static 'fancybox/index.js' %}"></script>
+
+    <script src="{% static 'data/profile.js' %}"></script>
+
+    <script src="{% static 'js/imitationPostCsrftoken.js' %}"></script>
+    <script src="{% static 'input/input-validation.js' %}"></script>
+    <script src="{% static 'input/input-components.js' %}"></script>
+
+    <script src="{% static 'link/link-components.js' %}"></script>
+
+    <script src="{% static 'form/base-form.js' %}"></script>
+    <script src="{% static 'form/base-listener-form.js' %}"></script>
+
+    <script src="{% static 'error/error-components.js' %}"></script>    
+
+    <script src="{% static 'order/claim-form-components.js' %}"></script>
+    <script src="{% static 'order/claim-form.js' %}"></script>
+    <script src="{% static 'order/product-form-components.js' %}"></script>
+    <script src="{% static 'order/product-form.js' %}"></script>
+    <script src="{% static 'order/product-items-form.js' %}"></script>
+    <script src="{% static 'order/index.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'cart/cart.css' %}" type="text/css" media="all">
+    <script src="{% static 'cart/cart-components.js' %}"></script>
+    <script src="{% static 'cart/cart-form.js' %}"></script>
+    <script src="{% static 'cart/index.js' %}"></script>
+
+    {% if setting_template.scripts %}{{ setting_template.scripts|safe }}{% endif %}
+    {% block additional_js %}{% endblock %}
+</body>
+</html>

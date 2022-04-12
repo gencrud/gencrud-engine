@@ -16,21 +16,6 @@ class BaseFastClaimAdmin(AbstractDefaultAdmin, AbstractCreatedAdmin):
 
     readonly_fields = ('id',) + AbstractCreatedAdmin.readonly_fields
 
-    fieldsets = (
-        ('Основные данные', {
-            'classes': ('suit-tab', 'suit-tab-data'),
-            'fields': (
-                ('id', 'status'), 'typeof',
-                'user', 'email', 'phone', 'comment',
-                'created', 'updated',
-            )
-        }),
-    )
-
-    suit_form_tabs = (
-        ('data', 'ДАННЫЕ'),
-    )
-
     def go_print(self, request, queryset):
         return render(request, 'order/go_print.html', context={'order': queryset.first()})
     go_print.short_description = 'Распечатать'

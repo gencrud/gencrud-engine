@@ -1,0 +1,29 @@
+{% load fb_versions  %}
+
+{% if social_network or  setting_template.email or  setting_template.phone %}
+<div class="col-md-3 col-sm-6">
+    <div class="small mb-2">
+        {% if setting_template.email %}
+            <a href="email:{{ setting_template.email }}"><i class="fa fa-envelope"></i> {{ setting_template.email }}</a><br>
+        {% endif %}
+        {% if setting_template.phone %}
+            <a href="tel:{{ setting_template.phone }}"><i class="fa fa-phone"></i> {{ setting_template.phone }}</a>
+        {% endif %}
+    </div>
+
+    {% if 'html_link' in type %}
+        <p>
+            {% for obj in social_network %}
+            <a href="{{ obj.url }}" data-toggle="tooltip" target="_blank" data-placement="top" title="{{ obj.image_title }}" class="external" data-animate-hover="shake">
+                {% if obj.get_main_image %}
+                <img height="35" width="35" class='img-circle' src="{% version obj.get_main_image 'thumbnail' %}">
+                {% else %}
+                {{ obj.html_link|safe }}
+                {% endif %}
+            </a>
+            {% endfor %}
+        </p>
+    {% endif %}
+</div>
+{% endif %}
+

@@ -18,12 +18,3 @@ class AbstractSEOAdmin(admin.ModelAdmin):
                 query.seo_keywords = default_title
             query.save()
     fill_seo_fields.short_description = 'Заполнить пустые CEO-поля'
-
-    @staticmethod
-    def fields_element():
-        return (
-            'СЕО', {
-                'classes': ('suit-tab', 'suit-tab-seo'),
-                'fields': AbstractSEOAdmin._fields}
-        )
-

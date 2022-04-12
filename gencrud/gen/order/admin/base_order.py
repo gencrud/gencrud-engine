@@ -8,7 +8,6 @@ from order.models import Order, OrderItem, Story
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ('product_item', )
-    suit_classes = 'suit-tab suit-tab-product'
     extra = 0
 
 
@@ -16,7 +15,6 @@ class StoryInline(admin.TabularInline):
     model = Story
     readonly_fields = ('total_cost', 'status', 'comment', 'created')
     extra = 0
-    suit_classes = 'suit-tab suit-tab-story'
     # закоментровать когда в продакшен уйдет -
     can_delete = None
     ordering = ('-id',)
@@ -32,22 +30,6 @@ class BaseOrderAdmin(AbstractDefaultAdmin, AbstractCreatedAdmin):
     list_display = ('id', 'user', 'email', 'city', 'total_cost', 'status', 'created')
     list_display_links = ('id', 'user')
     readonly_fields = ('id', 'total_cost') + AbstractCreatedAdmin.readonly_fields
-
-    fieldsets = (
-        ('Основные данные', {
-            'classes': ('suit-tab', 'suit-tab-data'),
-            'fields': (
-                ('id', 'status'), 'total_cost', 'user', 'last_name', 'first_name',
-                'address', 'postal_code', 'city', 'ttn', 'comment', 'created', 'updated',
-            )
-        }),
-    )
-
-    suit_form_tabs = (
-        ('data', 'ДАННЫЕ'),
-        ('product', 'ЦЕНЫ/ТОВАРЫ'),
-        ('story', 'ИСТОРИЯ'),
-    )
 
     def go_print(self, request, queryset):
         """

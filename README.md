@@ -82,17 +82,18 @@ Go to the root `project_name` folder.
 
 **Create a supers user:**
 ```
-$ python gencrud/manage.py createsuperuser
+python gencrud/manage.py createsuperuser
 ```
 
 **Run project:**
 ```
-$ python gencrud/manage.py runserver
+python gencrud/manage.py runserver
 ```
 
 **Run tests:**
 ```
-$ python gencrud/manage.py test
+cd gencrud
+python manage.py test
 ```
 
 

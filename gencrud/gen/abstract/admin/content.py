@@ -7,11 +7,3 @@ class AbstractContentAdmin(admin.ModelAdmin):
 
     _fields = ('title', 'description', 'html', 'is_show', 'author', 'sort', 'tags', 'is_allow_comments')
     filter_horizontal = ('tags',)
-
-    @staticmethod
-    def fields_element():
-        return (
-            'content', {
-                'classes': ('suit-tab', 'suit-tab-content',),
-                'fields': AbstractContentAdmin._fields}
-        )

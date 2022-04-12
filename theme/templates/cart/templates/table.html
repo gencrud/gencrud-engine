@@ -1,0 +1,104 @@
+{% load thumbnail %}
+
+{% if cart %}
+    <table class="table table-responsive table-hover">
+        <thead class="bg-dark text-warning">
+        <tr class="small">
+            <th>#</th>
+            <th>Товар</th>
+            <th>Кол-во</th>
+            <th>Цена, <i class="fa fa-rub" aria-hidden="true"></i></th>
+            <th>Сумма, <i class="fa fa-rub" aria-hidden="true"></i></th>
+            <th>x</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for p in cart %}
+                <tr class="table-dark">
+                    <td colspan="6">
+                        <a href="{{ p.url }}">
+                            {% if p.main_image %}<img src="{{ p.main_image }}" alt="{{ p.title }}" width="50" height="50">{% endif %}
+                            <b>{{ p.title }}</b> {{ p.totalPrice|floatformat:'2' }}
+                            <i class="fa fa-rub" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                {% for pi in p.productItems %}
+                    <tr class="spaceUnder">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ pi.title }}</td>
+                        <td>
+                            {% if is_update == True %}
+                                <input class="form-control" id="count_id_{{ pi.id }}" min="0" name="count" type="number" value="{{ pi.count }}" required>
+                            {% else %}
+                                {{ pi.count }}
+                            {% endif %}
+                        </td>
+                        <td class="text-muted" data-label="Цена">
+                            {% if pi.price_discount > 0 %}{{ pi.price_discount|floatformat:'2' }}{% else %}{{ pi.price|floatformat:'2' }}{% endif %}
+                        </td>
+                        <td class="text-muted" data-label="Сумма">
+                            <span id="piTotalPrice{{ pi.id }}">{{ pi.totalPrice|floatformat:'2' }}</span>
+                        </td>
+                        {% if is_update == True %}
+                        <td><a class="text-danger" href="{% url 'cart-remove' pi.id %}">x</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+        {% endfor %}
+
+        <tr class="bg-dark text-warning">
+            <td colspan="5">Общая стоимость</td>
+            <td class="price">
+                {#-- <i class="fa fa-rub" aria-hidden="true"></i> --#}
+                <span>{{ cart.0.totalPrice }}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+{% elif order %}
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr class="small">
+                <th>#</th>
+                <th>Товар</th>
+                <th>Кол-во</th>
+                <th>Цена, <i class="fa fa-rub" aria-hidden="true"></i></th>
+                <th>Сумма, <i class="fa fa-rub" aria-hidden="true"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in order.orderitem_set.all %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{{ p.product_item.product.get_absolute_url }}">{{ p.product_item.product.title }}</a>
+                    : {{ p.product_item.name }}
+                </td>
+                <td>
+                    {{ p.quantity }}
+                </td>
+                <td class="text-muted" data-label="Цена">
+                    {{ p.price|floatformat:'2' }}
+                </td>
+                <td class="text-muted" data-label="Сумма">
+                    {{ p.get_cost|floatformat:'2' }}
+                </td>
+                {% if is_update == True %}
+                <td><a class="text-danger" href="{% url 'cart-remove' pi.id %}">x</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="4">Общая стоимость</td>
+            <td class="price">
+                {#-- <i class="fa fa-rub" aria-hidden="true"></i> --#}
+                <strong>{{ order.get_total_cost }}</strong>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
