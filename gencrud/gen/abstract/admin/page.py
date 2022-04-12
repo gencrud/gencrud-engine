@@ -4,6 +4,7 @@ from .created import AbstractCreatedAdmin
 from .seo import AbstractSEOAdmin
 from .content import AbstractContentAdmin
 from .image import AbstractImageAdmin
+from gen.abstract.forms import HTMLFieldAdminForm
 
 
 class AbstractPageSeoAdmin(AbstractDefaultAdmin, AbstractContentAdmin, AbstractSEOAdmin,
@@ -11,6 +12,7 @@ class AbstractPageSeoAdmin(AbstractDefaultAdmin, AbstractContentAdmin, AbstractS
     class Meta:
         abstract = True
 
+    form = HTMLFieldAdminForm
     search_fields = ('title',)
     readonly_fields = AbstractImageAdmin.readonly_fields + AbstractCreatedAdmin.readonly_fields
     raw_id_fields = ('author',)
