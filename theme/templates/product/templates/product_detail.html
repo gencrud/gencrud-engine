@@ -14,9 +14,9 @@
 
 {% block main %}
 <section class="container">
-    <h1 class="mb-4">{{ product.title }}</h1>
+    <h1 class="m-5">{{ product.title }}</h1>
     <section class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             {% if product.get_main_image and product.get_main_image.image %}
             <div>
                 <a href="{{ product.get_main_image.image|thumbnail_url:'large' }}"
@@ -43,7 +43,7 @@
             {% endif %}
         </div>
 
-        <aside class="col-lg-5 pt-3">
+        <aside class="col-lg-4">
             {% if product.get_images.exists %}
             <div class="sidebar-product" id="thumbs">
                 {% for img in product.get_images %}
@@ -71,10 +71,14 @@
             {% endif %}
 
             {% include 'product/templates/product_items.html' with main_obj=product objects=product.productitem_set.all %}
+
+            {% comment %}
             <button class="btn btn-block btn-warning" data-toggle="modal" data-target="#product-claim-form-modal" data-product-pk="{{ product.pk }}">
                 <i class="fa fa-bullhorn"></i> Заявка</button>
             <button class="btn btn-block btn-primary" {% if not request.user.is_authenticated %}disabled{% endif %} data-target="#cart-form" data-product-pk="{{ product.pk }}">
                 <i class="fa fa-shopping-cart"></i> Корзина</button>
+            {% endcomment %}
+
             {% include 'cart/templates/warning_authenticate.html' with className='small' %}
 
             {# ---  run JS % include 'order/templates/product_form.html' with type="modal" title="Заявка на проект" % --- #}
@@ -85,7 +89,7 @@
     </section>
 
     {% if product.html %}
-    <section id="details">
+    <section class="mt-5 mb-5" id="details">
         <ul class="nav nav-tabs" id="tabListDescription" role="tablist">
             {% if product.html %}
              <li class="nav-item">
@@ -95,77 +99,31 @@
                     aria-selected="false">Подробное описание</a>
              </li>
             {% endif %}
-            {% if product.get_item_tables %}
+            {% if product.get_product_params %}
              <li class="nav-item">
-                 <a class="nav-link" id="detail-price-tab" href="#detail-price"
-                     data-toggle="tab" role="tab"
-                     aria-controls="html"
-                     aria-selected="false">Детализация стоимости</a>
+                 <a class="nav-link" id="profile-params" href="#params"
+                    data-toggle="tab" role="tab"
+                    aria-controls="html"
+                    aria-selected="false">Параметры</a>
              </li>
             {% endif %}
         </ul>
         <div class="tab-content p-3" id="tabContent">
             <div class="tab-pane fade show active" id="html" role="tabpanel" aria-labelledby="html-tab">
             {% if product.html %}
-            <div class="content">{{ product.html|safe }}</div>
+                <div class="content">{{ product.html|safe }}</div>
             {% endif %}
             </div>
-            {% if product.get_item_tables %}
-            <div class="row tab-pane fade" id="detail-price" role="tabpanel" aria-labelledby="detail-price-tab">
-                <div class="table-responsive">
-                    {% for t in product.get_item_tables %}
-                    <table class="table table-sm small">
-                        <caption>{{ t.caption }}</caption>
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Наименование</th>
-                                <th scope="col">Ед.изм</th>
-                                <th scope="col">Кол-во</th>
-                                <th scope="col">Размер-высота</th>
-                                <th scope="col">Размер-ширина</th>
-                                <th scope="col">Размер-длины</th>
-                                <th scope="col">Размер-кол-во</th>
-                                <th scope="col">Цена (руб)</th>
-                                <th scope="col">Сумма (руб)</th>
-                                <th scope="col">Прим.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in t.rows %}
-                            <tr scope="row">
-                                <td>{{ row.name }}</td>
-                                <td>{{ row.unit }}</td>
-                                <td>{{ row.quantity }}</td>
-                                <td>{{ row.height_size }}</td>
-                                <td>{{ row.weight_size }}</td>
-                                <td>{{ row.length_size }}</td>
-                                <td>{{ row.quantity_size }}</td>
-                                <td>{{ row.price }}</td>
-                                <td>{{ row.amount }}</td>
-                                <td>
-                                    {% if row.note %}
-                                    <button type="button" class="btn btn-sm btn-info" data-toggle="popover" data-content="{{ row.note }}">
-                                        <span>!</span>
-                                    </button>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            <tr>
-                                <th scope="row">ИТОГО</th>
-                                <td colspan="z1">{{ t.total_quantity }}</td>
-                                <td colspan="5"></td>
-                                <td colspan="2">{{ t.total_amount }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="7"></td>
-                                <th scope="row">ВСЕГО</th>
-                                <td colspan="2">{{ t.price }}</td>
-                            </tr>
-                      </tbody>
-                    </table>
-                    <br /><br />
+            {% if product.get_product_params %}
+            <div class="tab-pane fade" id="params" role="tabpanel" aria-labelledby="params-tab">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                    {% for p in product.get_product_params %}
+                        <li class="list-group-item">
+                            {{ p.param.title }}: <b>{{ p.value }}</b>
+                        </li>
                     {% endfor %}
+                    </ul>
                 </div>
             </div>
             {% endif %}
@@ -173,12 +131,12 @@
     </section>
     {% endif %}
     <section class="mt-5 mb-5">{% include 'default/next_prev.html' %}</section>
-
-    {% if product.is_allow_comments %}<section class="mt-5 mb-5">{% include 'default/form_comment.html' %}</section>{% endif %}
-    {% if comments %}<section class="mt-5 mb-5">{% include 'default/comment_list.html' %}</section>{% endif %}
-
     {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}
 </section>
+
+{% if product.is_allow_comments %}<section class="container mt-5 mb-5">{% include 'default/form_comment.html' %}</section>{% endif %}
+{% if comments %}<section class="container mt-5 mb-5">{% include 'default/comment_list.html' %}</section>{% endif %}
+
 {% endblock %}
 
 
