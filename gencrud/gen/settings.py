@@ -4,6 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GENCRUD_LIBS = [
     'filebrowser',
+    'mptt',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.auth',
@@ -13,7 +14,6 @@ GENCRUD_LIBS = [
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
-    'mptt',
     'ckeditor',
     'ckeditor_uploader',
     'daterange_filter',
@@ -78,7 +78,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'get_include_area': 'gen.site_info.templatetags.get_include_area',
-                'staticfiles': 'django.templatetags.static',
+                # 'staticfiles': 'django.templatetags.static',
             }
         },
 
@@ -107,10 +107,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'gencrud', 'static'),
     os.path.join(BASE_DIR, '..', 'app', 'static'))
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'theme', 'static')
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder')
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'compressor.finders.CompressorFinder')
 
 # COMPRESS_ENABLED = True
 # COMPRESS_PRECOMPILERS = (
