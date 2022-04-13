@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from gen.abstract.admin.page import COLLIDE_CLASSES_CSS
 from gen.abstract.admin import (AbstractPageSeoAdmin, AbstractImageInlineAdmin)
 from home.models import (Home, HomeImage)
 from gen.home.strings import APP_NAME
@@ -6,7 +8,7 @@ from gen.home.strings import APP_NAME
 
 class HomeImageInline(AbstractImageInlineAdmin):
     model = HomeImage
-    classes = ('collapse', 'open')
+    classes = COLLIDE_CLASSES_CSS
 
 
 @admin.register(Home)
@@ -19,22 +21,22 @@ class BaseHomeAdmin(AbstractPageSeoAdmin):
 
     fieldsets = (
         ('Main content', {
-            'fields': ('title', 'description', 'html', 'video', 'is_show',  'sort', 'is_allow_comments')
+            'fields': AbstractPageSeoAdmin.fieldsets_main_content() + ('video', )
         }),
         ('Inner elements', {
-            'classes': ('collapse', 'hide'),
-            'fields': ('blog', 'catalogs', 'tags')
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': ('blog', 'catalogs') + ('tags', )
         }),
         ('SEO options', {
-            'classes': ('collapse', 'open'),
-            'fields': ('slug', 'seo_title', 'seo_description', 'seo_keywords', 'og_locale'),
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': AbstractPageSeoAdmin.fieldsets_seo_options()
         }),
         ('Scripts options', {
-            'classes': ('collapse', 'open'),
+            'classes': COLLIDE_CLASSES_CSS,
             'fields': ('scripts', ),
         }),
         ('Information', {
-            'classes': ('collapse', 'open'),
+            'classes': COLLIDE_CLASSES_CSS,
             'fields': ('thumb', 'created', 'updated'),
         })
     )

@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from catalog.models import Catalog, CatalogImage
-from gen.abstract.admin import AbstractMPTTPageSeoAdmin, AbstractImageInlineAdmin
+from gen.abstract.admin import AbstractMPTTPageSeoAdmin, AbstractImageInlineAdmin, AbstractPageSeoAdmin
 from gen.catalog.strings import APP_NAME
 
 
@@ -34,7 +34,7 @@ class CatalogImageInline(AbstractImageInlineAdmin):
 @admin.register(Catalog)
 class BaseCatalogAdmin(ImportExportModelAdmin, AbstractMPTTPageSeoAdmin):
     resource_class = CatalogResource
-    inlines = (CatalogImageInline,)
+    inlines = [CatalogImageInline]
     actions = AbstractMPTTPageSeoAdmin.actions + ('set_fixtures', 'load_fixtures')
 
     def set_fixtures(self, request, queryset, dir_name=APP_NAME, filename='default.json'):

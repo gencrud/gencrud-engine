@@ -1,10 +1,12 @@
 from django.contrib import admin
 
 
-class AbstractCreatedAdmin(admin.ModelAdmin):
-    class Meta:
-        abstract = True
-
+class BaseCreatedAdmin:
     date_hierarchy = 'created'
     readonly_fields = ('created', 'updated')
     list_filter = ('created', 'updated')
+
+
+class AbstractCreatedAdmin(BaseCreatedAdmin, admin.ModelAdmin):
+    class Meta:
+        abstract = True

@@ -4,10 +4,7 @@ from django.conf import settings
 from gen.utils.thumbnail import add_watermark, __get_thumbnail__
 
 
-class AbstractImageAdmin(admin.ModelAdmin):
-    class Meta:
-        abstract = True
-
+class BaseImageAdmin:
     readonly_fields = ('thumb',)
     search_fields = ('image_title',)
     actions = ('set_watermark',)
@@ -42,3 +39,7 @@ class AbstractImageAdmin(admin.ModelAdmin):
                                       add_watermark(img_open, watermark).save(img_path)))  # NOTE: print(!)
     set_watermark.short_description = 'Наложить водяной знак ``../static/images/logo.png``'
 
+
+class AbstractImageAdmin(BaseImageAdmin, admin.ModelAdmin):
+    class Meta:
+        abstract = True

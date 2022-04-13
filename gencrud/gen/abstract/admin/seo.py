@@ -1,11 +1,15 @@
 from django.contrib import admin
 
 
-class AbstractSEOAdmin(admin.ModelAdmin):
+class BaseSEOAdmin:
     view_on_site = True
     prepopulated_fields = {'slug': ('title',)}
     actions = ('fill_seo_fields',)
     _fields = ('slug', 'seo_title', 'seo_description', 'seo_keywords', 'og_locale', 'scripts')
+
+    @staticmethod
+    def fieldsets_seo_options():
+        return tuple(('slug', 'seo_title', 'seo_description', 'seo_keywords', 'og_locale'))
 
     def fill_seo_fields(self, request, queryset):
         for query in queryset:
@@ -17,4 +21,9 @@ class AbstractSEOAdmin(admin.ModelAdmin):
             if not query.seo_keywords:
                 query.seo_keywords = default_title
             query.save()
+
     fill_seo_fields.short_description = 'Заполнить пустые CEO-поля'
+
+
+class AbstractSEOAdmin(BaseSEOAdmin, admin.ModelAdmin):
+    pass
