@@ -11,15 +11,6 @@ class BaseCatalogModel(AbstractMPTTPageSeoModel):
         verbose_name = BASE_CATALOG_VERBOSE_NAME
         verbose_name_plural = BASE_CATALOG_VERBOSE_NAME
 
-    # @classmethod
-    # def queryset_not_cloned(cls, flat_pk=False):
-    #     qs = cls.objects.filter(
-    #         is_show=True, sort__gt=0
-    #     ).exclude(
-    #         title__endswith=BaseAdmin.prefix_clone
-    #     )
-    #     return qs if not flat_pk else qs.values_list('pk', flat=True)
-
     def get_images(self):
         return CatalogImage.objects.filter(catalog_id=self.pk, catalog__is_show=True)
 

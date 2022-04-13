@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-lg-6 html">{{ home.html|safe }}</div>
             {% else %}
-                <div class="col-md-10 html">{{ home.html|safe }}</div>
+                <div class="html">{{ home.html|safe }}</div>
             {% endif %}
             </article>
         {% endif %}
@@ -45,7 +45,7 @@
     </section>
     {% endif %}
 
-    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title='New' %}
+    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title=' ' %}
     {% get_include_area request code='counter' %}
 
     {% if home.blog %}
@@ -55,6 +55,7 @@
         </div>
     </section>
     {% endif %}
+
     {% include 'product/templates/item_bestseller_product.html' with objects=bestseller_products title='Top & Best' %}
 
     {% if setting_template.phone %}

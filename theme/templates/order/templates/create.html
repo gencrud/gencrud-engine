@@ -16,7 +16,7 @@
         {% include 'cart/templates/table.html' with is_update=False %}
 
         <p><span>Итоговая сумма: </span><b>{{ cart.totalPrice|floatformat:'2' }}</b></p>
-        <section class="row bg-white p-4">
+        <section class="row p-4">
             <fieldset class="container">
                 <legend>Заполните данные, чтобы оформить заказ</legend>
                 {% if setting_template.terms_of_use %}

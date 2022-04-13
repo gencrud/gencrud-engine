@@ -12,6 +12,9 @@ class AbstractPageSeoAdmin(AbstractDefaultAdmin, BaseContentAdmin, BaseSEOAdmin,
     class Meta:
         abstract = True
 
+    view_on_site = True
+    prepopulated_fields = {'slug': ('title',)}
+
     form = HTMLFieldAdminForm
     search_fields = ('title',)
     readonly_fields = AbstractImageAdmin.readonly_fields + AbstractCreatedAdmin.readonly_fields
@@ -50,6 +53,9 @@ class AbstractMPTTPageSeoAdmin(AbstractDefaultMPTTAdmin, BaseContentAdmin, BaseS
         abstract = True
 
     mptt_level_indent = 23
+
+    view_on_site = True
+    prepopulated_fields = {'slug': ('title',)}
 
     form = HTMLFieldAdminForm
     search_fields = AbstractPageSeoAdmin.search_fields

@@ -1,3 +1,71 @@
-header, footer, .carousel-fade, .dropdown-menu {
-    background-color: #29348c;
+header, footer, .dropdown-menu {
+    background-color: #20202a;
+}
+
+.row section.container {
+    background-color: #3b3b52;
+}
+
+body {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 200;
+    background-color: #2b2b3c;
+
+}
+
+.h1, h1 {
+    font-size: 3rem;
+}
+
+.h4, h4 {
+    font-size: 2rem;
+}
+
+.h5, h5, .lead {
+    font-size: 1.7rem;
+}
+
+.h6, h6 {
+    font-size: 1.2rem;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
+
+.navbar .navbar-nav:first-child {
+    margin-left: 235px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-weight: 700;
+}
+
+.row section.container {
+    padding: 2rem 4rem;
+}
+
+.list-group-item {
+    background-color: unset;
+}
+
+.card, .carousel-caption {
+    font-family: monospace;
+    background-color: #2b2b3c;
+}
+
+.card:hover {
+    opacity: 0.9
+}
+.carousel-inner {
+    min-height: 360px;
+    max-height: 500px;
+}
+
+.carousel-caption {
+    right: 6%;
+    left: unset;
+    bottom: 30%;
+    text-align: left;
 }

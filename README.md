@@ -48,6 +48,8 @@ This should take about a minute!
 ### Structure project (after install)
 + **app/** - 	frontend folder (css, js, images, ...)
 + **gencrud/** - backand folder / core
++ **gencrud/gen** - core
++ **gencrud/gencrud** - core
 + **theme/** - 	theme folder (html, media, ...)
 + **venv/** -  	virtual environment folder
 + README.md

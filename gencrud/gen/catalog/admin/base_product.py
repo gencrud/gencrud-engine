@@ -3,6 +3,8 @@ from django.db import IntegrityError
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from import_export.fields import Field
+
+from gen.abstract.admin.page import COLLIDE_CLASSES_CSS
 from catalog.models import Product, ProductImage, ProductItem, ProductParam
 from gen.abstract.mixins.clone import CloneObjectMixin
 from gen.abstract.admin import (
@@ -50,7 +52,6 @@ class ProductImageInline(AbstractImageInlineAdmin):
 
 class ProductItemInline(AbstractDefaultStackedInlineAdmin):
     model = ProductItem
-    suit_classes = 'suit-tab suit-tab-price'
     raw_id_fields = ('default_price', )
     fields = (
         'name', 'text',
@@ -71,6 +72,28 @@ class BaseProductAdmin(AbstractPageSeoAdmin, ImportExportModelAdmin):
     list_display = AbstractPageSeoAdmin.list_display + ('is_bestseller', 'is_new', 'articul')
     list_display_links = AbstractPageSeoAdmin.list_display_links + ('articul', )
     list_editable = AbstractPageSeoAdmin.list_editable + ('is_bestseller', 'is_new')
+
+    fieldsets = (
+        ('Main content', {
+            'fields': AbstractPageSeoAdmin.fieldsets_main_content() + ('articul', 'is_bestseller', 'is_new')
+        }),
+        ('Inner elements', {
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': ('tags', 'catalogs', 'recommend_products')
+        }),
+        ('SEO options', {
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': AbstractPageSeoAdmin.fieldsets_seo_options()
+        }),
+        ('Scripts options', {
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': ('scripts', 'layout'),
+        }),
+        ('Information', {
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': ('thumb', 'created', 'updated'),
+        })
+    )
 
     def get_price(self, obj):
         return obj.get_price()

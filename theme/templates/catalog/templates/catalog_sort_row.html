@@ -1,4 +1,4 @@
-<section class="p-4 bg-white container info-bar">
+<section class="p-4 container info-bar">
     <div class="container small">
         <div class="products-showing float-right">
             <span>{% if 'per_page' in request.GET %}{{ request.GET.per_page }}{% else %}12{% endif %}</span> / <span>{{ objects|length }}</span>
