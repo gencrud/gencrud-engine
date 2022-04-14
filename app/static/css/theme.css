@@ -30,6 +30,7 @@ body,
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
+    font-family: monospace;
 }
 
 blockquote {
@@ -38,8 +39,8 @@ blockquote {
 }
 
 .lead {
-    font-family: monospace;
     color: #adabb6;
+    padding: 10px 15px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -56,10 +57,6 @@ blockquote {
 .breadcrumb {
     font-size: 0.8rem;
     background-color: unset;
-}
-
-.row section.container {
-    /*padding: 2rem 4rem;*/
 }
 
 .list-group-item {

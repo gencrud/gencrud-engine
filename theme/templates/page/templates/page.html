@@ -13,7 +13,7 @@
 {% block main %}
     <div class="container">
         <article>
-            <h1 class="display-4">{{ object.title }}</h1>
+            <h1 class="display-2 mb-3 mt-3">{{ object.title }}</h1>
             {% if object.description %}<p class="lead">{{ object.description|safe }}</p>{% endif %}
             {% if object.get_images.exists %}
                 <section class="container-fluid mt-5 mb-5">

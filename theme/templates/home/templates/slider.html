@@ -20,7 +20,7 @@
             <div class="carousel-caption col-4">
                 <h5>{{ sh.title }}</h5>
                 {% if sh.html_description %}<small>{{ sh.html_description|safe }}</small>{% endif %}
-                {% if sh.url %}<a target="_blank" href="{{ sh.url }}">More</a>{% endif %}
+                {% if sh.url %}<p class="p-0 m-0"><a target="_blank" href="{{ sh.url }}">More</a></p>{% endif %}
             </div>
             {% endif %}
         </div>

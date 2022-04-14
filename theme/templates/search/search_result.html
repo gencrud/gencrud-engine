@@ -17,7 +17,7 @@
 
 {% block main %}
     <div class="container">
-        <h1 class="h2">Поиск по запросу: <i class="h1">"{{ request.GET.q }}"</i>.</h1>
+        <h1>Поиск по запросу: <i class="h1">"{{ request.GET.q }}"</i>.</h1>
         {% for model_obj in objects %}
             <p class="small">...</p>
             {% for obj in model_obj %}

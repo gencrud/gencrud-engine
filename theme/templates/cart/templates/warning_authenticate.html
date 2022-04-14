@@ -1,3 +1,4 @@
+{% comment %}
 {% if not request.user.is_authenticated %}
 <p class="text-muted {{ className }}">
     <i class="fa fa-exclamation-triangle text-warning"></i>
@@ -5,3 +6,4 @@
         чтобы использовать <a href="{% url 'cart_detail' %}">корзину</a>.</span>
 </p>
 {% endif %}
+{% endcomment %}

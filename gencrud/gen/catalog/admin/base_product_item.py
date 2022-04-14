@@ -6,9 +6,9 @@ from catalog.models.product_item import ProductItem
 
 @admin.register(ProductItem)
 class BaseProductItemAdmin(AbstractDefaultAdmin, AbstractCreatedAdmin):
-    raw_id_fields = ('product', 'default_price', )
+    raw_id_fields = ('product', )
     search_fields = ('name', 'product__title')
-    list_display = ('name', 'product', 'default_price',)
+    list_display = ('name', 'product',)
     list_display_links = ('name', 'product')
     list_filter = ('product__catalogs', ) + AbstractCreatedAdmin.list_filter
 

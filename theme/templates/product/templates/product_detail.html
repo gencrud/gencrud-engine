@@ -14,7 +14,7 @@
 
 {% block main %}
 <section class="container">
-    <h1 class="m-5">{{ product.title }}</h1>
+    <h1 class="display-2 m-5">{{ product.title }}</h1>
     <section class="row">
         <div class="col-lg-8">
             {% if product.get_main_image and product.get_main_image.image %}
@@ -30,14 +30,12 @@
                 </a>
             </div>
             {% endif %}
-            {# --- line bestseller AND new product --- #}
             {% if product.is_new %}
                 <div class="badge badge-success new">NEW</div>
             {% endif %}
             {% if product.is_bestseller %}
                 <div class="badge badge-warning top">TOP</div>
             {% endif %}
-            {# ----------------- #}
             {% if product.description %}
             <p id="description" class="lead p-2">{{ product.description|safe }}</p>
             {% endif %}
@@ -96,7 +94,7 @@
                  <a class="nav-link active" id="profile-tab" href="#html"
                     data-toggle="tab" role="tab"
                     aria-controls="html"
-                    aria-selected="false">Подробное описание</a>
+                    aria-selected="false">Description</a>
              </li>
             {% endif %}
             {% if product.get_product_params %}
@@ -104,8 +102,16 @@
                  <a class="nav-link" id="profile-params" href="#params"
                     data-toggle="tab" role="tab"
                     aria-controls="html"
-                    aria-selected="false">Параметры</a>
+                    aria-selected="false">Parameters</a>
              </li>
+            {% endif %}
+            {% if product.productitem_set.exists %}
+                <li class="nav-item">
+                     <a class="nav-link" id="profile-productitem_set" href="#productitem_set"
+                        data-toggle="tab" role="tab"
+                        aria-controls="html"
+                        aria-selected="false">Download</a>
+                </li>
             {% endif %}
         </ul>
         <div class="tab-content p-3" id="tabContent">
@@ -127,11 +133,30 @@
                 </div>
             </div>
             {% endif %}
+            {% if product.productitem_set.exists %}
+            <div class="tab-pane fade" id="productitem_set" role="tabpanel" aria-labelledby="productitem_set-tab">
+                <div class="col">
+                    <ul class="list-group list-group-flush text-center">
+                    {% for p in product.productitem_set.all %}
+                        <li class="list-group-item">
+                            <h5 class="lead">
+                            {% if p.text %}
+                                Download {{ p.name }}: <a href="{{ p.text }}" >{{ p.text }}</a>
+                            {% else %}
+                                {{ p.name }}
+                            {% endif %}
+                            </h5>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </section>
     {% endif %}
     <section class="mt-5 mb-5">{% include 'default/next_prev.html' %}</section>
-    {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}
+    {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='More games' %}
 </section>
 
 {% if product.is_allow_comments %}<section class="container mt-5 mb-5">{% include 'default/form_comment.html' %}</section>{% endif %}

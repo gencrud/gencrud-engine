@@ -42,21 +42,12 @@ class BaseProductItemModel(AbstractCreatedModel):
         max_digits=12, decimal_places=2, validators=[MinValueValidator(Decimal('0'))],
         help_text='Если указана - станет `Ценой` товара')
     is_main = models.BooleanField(default=False, verbose_name='Главный')
-    default_price = models.ForeignKey(
-        'catalog.Price', verbose_name=TAKE_FROM_PRICE,
-        null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
         self.set_main()
-
-        if (not self.price and not self.text) and self.default_price:
-            self.price = self.default_price.price
-            self.name = self.default_price.title
-            self.text = self.default_price.name
-            self.unit = self.default_price.unit
 
         if self.price_discount and not self.price:
             self.price = self.price_discount

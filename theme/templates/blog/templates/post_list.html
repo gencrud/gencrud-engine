@@ -16,7 +16,7 @@
 {% block main %}
 <div class="container">
     <article>
-        <h1 class="display-4">{{ object.title }}</h1>
+        <h1 class="display-2">{{ object.title }}</h1>
         {% if object.description  %}<p class="lead mb-4">{{ object.description|safe }}</p><br />{% endif %}
         {% if objects %}{% include 'default/pagination.html' %}{% endif %}
         <section class="mt-5 mb-5">{% include 'default/cards_list_image_caps.html' with objects=objects %}</section>

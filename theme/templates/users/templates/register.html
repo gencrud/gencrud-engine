@@ -1,35 +1,35 @@
 {% extends 'main.html' %}
 
-{% block title %}Регистрация{% endblock %}
-{% block description %}Регистрация{% endblock %}
-{% block keywords %}Регистрация{% endblock %}
+{% block title %}Registration{% endblock %}
+{% block description %}Registration{% endblock %}
+{% block keywords %}Registration{% endblock %}
 
 {% block additional_css %}{% endblock %}
 
 {% block main %}
     <div class="container mt-5 mb-5">
-        <h1>Регистрация</h1>
+        <h1>Registration</h1>
         <div class="text-danger">{{ form.errors }}</div>
         <form method="post" action="{% url 'user_register' %}">{% csrf_token %}
             <p>
                 <label for="id_username">Email:</label>
                 <input class='form-control' type="email" name="username" placeholder=":Email" required id="id_username" maxlength="150" />
-                <small class="text-muted ">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</small>
+                <small class="text-muted ">Obligatory field. No more than 150 characters. Letters, numbers, and @/./+/-/_ characters only.</small>
             </p>
             <p>
-                <label for="id_password1">Пароль:</label>
+                <label for="id_password1">Password:</label>
                 <input class='form-control' type="password" name="password1" required="" id="id_password1">
             </p>
             <ul class="small text-muted">
-                <li>Ваш пароль не должен совпадать с вашим именем или другой персональной информацией или быть слишком похожим на неё.</li>
-                <li>Ваш пароль должен содержать как минимум 8 символов.</li>
-                <li>Ваш пароль не может быть одним из широко распространённых паролей.</li>
-                <li>Ваш пароль не может состоять только из цифр.</li>
+                <li>Your password should not be the same as or too similar to your name or other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password cannot be one of the commonly used passwords.</li>
+                <li>Your password cannot be made up of numbers only.</li>
             </ul>
             <p>
-                <label for="id_password2">Подтверждение пароля:</label>
+                <label for="id_password2">Repeat password:</label>
                 <input class='form-control' type="password" name="password2" required="" id="id_password2" />
-                <small class="text-muted">Для подтверждения введите, пожалуйста, пароль ещё раз.</small>
+                <small class="text-muted">To confirm, please enter your password again.</small>
             </p>
 
 {#                 {% comment %}#}
@@ -41,10 +41,12 @@
 {#                {% endcomment %}#}
 
             <p>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Создать аккаунт</button>
+                <button type="submit" class="btn btn-lg  btn-block btn-outline-primary"><i class="fa fa-user-md"></i> Create account</button>
                 <input type="hidden" name="next" value="{% url 'home' %}">
             </p>
-            <a href="{% url 'user_login' %}">Уже есть акаунт. Войти.</a>
+            <p class="form-group mt-5">
+                <a href="{% url 'user_login' %}">Already have an account? Log in</a>
+            </p>
          </form>
     </div>
 

@@ -72,26 +72,28 @@
                   <span class="navbar-toggler-icon"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarToggleMenu">
+                    {% comment %}
                     <a class="dropdown-item text-info" type="button" data-toggle="modal" data-target="#claim-modal" title="Заявка">
                         <i class="fa fa-bullhorn"></i> Заявка{% csrf_token %}
                     </a>
+                    {% endcomment %}
                     {% if user.is_authenticated %}
                     <a class="dropdown-item text-info" href="{% url 'profile' %}" title="Профиль">
-                        <i class="fa fa-user"></i> Профиль
+                        <i class="fa fa-user"></i> Profile
                     </a>
                     {% else %}
                     {# -- MODAL <a href="#" data-toggle="modal" data-target="#login-modal">Login</a> #}
                         <a class="dropdown-item text-info" href="{% url 'user_login' %}" title="Войти">
-                            <i class="fa fa-user"></i> Войти
+                            <i class="fa fa-user"></i> Log in
                         </a>
                     {% endif %}
                     {% if user.is_authenticated %}
                         <a class="dropdown-item text-info" href="{% url 'logout' %}" title="Выход">
-                            <i class="fa fa-reply"></i> Выход
+                            <i class="fa fa-reply"></i> Logout
                         </a>
                     {% else %}
-                        <a class="dropdown-item text-info" href="{% url 'user_register' %}" title="Регистрация">
-                            <i class="fa fa-pencil"></i> Регистрация
+                        <a class="dropdown-item text-info" href="{% url 'user_register' %}" title="Registration">
+                            <i class="fa fa-pencil"></i> Registration
                         </a>
                     {% endif %}
                 </div>

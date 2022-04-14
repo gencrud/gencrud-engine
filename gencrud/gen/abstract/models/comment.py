@@ -8,7 +8,7 @@ class AbstractCommentModel(AbstractCreatedModel):
         abstract = True
         ordering = ('created',)
 
-    text = models.TextField(verbose_name='Комментарий')
+    text = models.TextField(verbose_name='Comments')
     ip_address = models.GenericIPAddressField(default='0.0.0.0', verbose_name='IP address', null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, verbose_name='Пользователь', on_delete=models.CASCADE)
     username = models.CharField(max_length=125, default='anonymous', blank=True, null=True, verbose_name='Имя пользователя')

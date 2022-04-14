@@ -3,9 +3,7 @@ from .client import get_client_ip
 
 
 class ABSCommentForm(forms.ModelForm):
-    """
-    Абстрактная форма Отзыва/коментария/вопроса/ для пользователя.
-    """
+
     def __init__(self, *args, **kwargs):
         super(ABSCommentForm, self).__init__(*args, **kwargs)
 
@@ -20,7 +18,6 @@ class ABSCommentForm(forms.ModelForm):
         if 'initial' in kwargs.keys():
             request = kwargs['initial']['request']
             self.fields['ip_address'].initial = get_client_ip(request)
-            # зарегистрированый пользователь
 
             if request.user.is_authenticated:
                 user = request.user

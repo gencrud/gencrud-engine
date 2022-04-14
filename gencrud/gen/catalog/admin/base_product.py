@@ -52,12 +52,10 @@ class ProductImageInline(AbstractImageInlineAdmin):
 
 class ProductItemInline(AbstractDefaultStackedInlineAdmin):
     model = ProductItem
-    raw_id_fields = ('default_price', )
     fields = (
         'name', 'text',
         ('unit', 'is_main'),
         ('price', 'price_discount'),
-        'default_price',
     )
 
 
@@ -136,7 +134,6 @@ class BaseProductAdmin(AbstractPageSeoAdmin, ImportExportModelAdmin):
                     price=pi.price,
                     price_discount=pi.price_discount,
                     is_main=pi.is_main,
-                    default_price=pi.default_price
                 ).save()
 
             for pi in cache_product_images:

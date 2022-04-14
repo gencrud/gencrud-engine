@@ -10,9 +10,6 @@ from gen.users.forms.new_user import NewUserForm
 
 
 class Register(MainPageMixin, TemplateView):
-    """
-    Регистрация пользователя
-    """
     template_name = 'users/templates/register.html'
 
     def get_context_data(self, **kwargs):

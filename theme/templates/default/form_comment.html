@@ -5,9 +5,9 @@
 {% else %}
 <form method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
 {% endif %}
-    <fieldset>
+    <fieldset class="p-5">
         <div class='alert-danger'>{{ comment_form.errors }}</div>
         {{ comment_form.as_p }}
     </fieldset>
-    <button type="submit" class="btn btn-block btn-dark"><i class="fa fa-comment-o"></i> Оставить коментарий</button>
+    <button type="submit" class="btn btn-lg btn-block btn-outline-primary"><i class="fa fa-comment-o"></i> Send </button>
 </form>

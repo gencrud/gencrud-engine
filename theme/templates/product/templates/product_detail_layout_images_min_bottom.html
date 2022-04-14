@@ -85,7 +85,7 @@
                  <a class="nav-link active" id="profile-tab" href="#html"
                     data-toggle="tab" role="tab"
                     aria-controls="html"
-                    aria-selected="false">Подробное описание</a>
+                    aria-selected="false">Description</a>
              </li>
             {% endif %}
             {% if product.get_product_params %}
@@ -93,7 +93,7 @@
                  <a class="nav-link" id="profile-params" href="#params"
                     data-toggle="tab" role="tab"
                     aria-controls="html"
-                    aria-selected="false">Параметры</a>
+                    aria-selected="false">Parameters</a>
              </li>
             {% endif %}
             {% if product.get_item_tables %}
@@ -101,7 +101,7 @@
                  <a class="nav-link" id="detail-price-tab" href="#detail-price"
                      data-toggle="tab" role="tab"
                      aria-controls="html"
-                     aria-selected="false">Детализация стоимости</a>
+                     aria-selected="false">Details</a>
              </li>
             {% endif %}
         </ul>
@@ -188,7 +188,7 @@
     {% endif %}
     <div class="mt-5 mb-5">{% include 'default/next_prev.html' with next_prev=next_prev %}</div>
     {% if comments %}<div class="mt-5 mb-5">{% include 'default/comment_list.html' %}</div>{% endif %}
-    {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}
+    {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='More games' %}
  </div>
 {% endblock %}
 

@@ -27,7 +27,7 @@
                 <form method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
                     <div id="form-messages" class="submit-form-message">{{ comment_form.errors }}</div>
                     <div class="form-item">{{ comment_form }}</div>
-                    <input type="submit" class="btn-form" value="Оставить коментарий">
+                    <input type="submit" class="btn-form" value="Send">
                 </form>
                 <br><br><br>
 {#                <form class="row" action="" method="post">{% csrf_token %}#}

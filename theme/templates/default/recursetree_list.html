@@ -1,8 +1,8 @@
 {% load static %}
 {% load mptt_tags %}
 
-<section class="mt-5 container">
-    <strong>Все разделы:</strong>
+<section class="mt-5 p-5 container">
+    <strong>All sections:</strong>
     <ol class="small">
         {% recursetree leftbar.obj_list %}
             <li class='{% if not node.is_leaf_node %}has-sub parent{% endif %}{% if leftbar.obj.title == node.title %} active{% endif %}'>
