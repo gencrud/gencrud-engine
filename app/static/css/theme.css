@@ -77,8 +77,9 @@ blockquote {
 }
 
 .carousel-caption {
-    right: 6%;
+    right: 4%;
     left: unset;
-    bottom: 30%;
+    bottom: 18%;
     text-align: left;
+    opacity: .8;
 }

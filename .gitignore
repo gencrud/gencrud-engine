@@ -2,8 +2,8 @@
 .vscode
 __pycache__
 venv
-node_modules/*
-theme/static/*
-theme/media/*
+node_modules
+theme/static
+#theme/media
 *.pyc
 *.tmp

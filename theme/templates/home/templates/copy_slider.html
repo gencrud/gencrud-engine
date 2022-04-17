@@ -1,0 +1,42 @@
+{# Slider #}
+{% load static %}
+{% load thumbnail %}
+
+{% if slider_home %}
+{% with slider=slider_home  %}
+
+<div id="carouselHomeCaptions" class="carousel w-100 slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for sh in slider %}
+        <li data-target="#carouselHomeCaptions" data-slide-to="{{ sh.pk }}" {% if forloop.first %} class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <div class="carousel-inner">
+        {% for sh in slider %}
+        <div class="carousel-item {% if forloop.first %} active{% endif %}" style="max-height: 560px; min-height:320px;">
+            {% if sh.image %}<img src="{{ sh.image|thumbnail_url:'large' }}" class="d-block w-100" alt="{{ sh.title }}" style="margin-top: -20px">{% endif %}
+            {% if sh.title %}
+            <div class="carousel-caption col-4">
+                <h5>{{ sh.title }}</h5>
+                {% if sh.html_description %}<small>{{ sh.html_description|safe }}</small>{% endif %}
+                {% if sh.url %}<p class="p-0 m-0"><a target="_blank" href="{{ sh.url }}">More</a></p>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if slider.count > 1 %}
+    <a class="carousel-control-prev" href="#carouselHomeCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselHomeCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    {% endif %}
+</div>
+{% endwith %}
+{% endif %}

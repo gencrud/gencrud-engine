@@ -10,11 +10,16 @@
 {% block main %}
     {% include 'home/templates/slider.html' %}
 
-    <section class="container mt-5 mb-3">
+    <section class="container mt-5 mb-3 px-4 py-5 text-center">
         {% if not home.title %}{% include 'home/templates/first_step_run.html' %}
-        {% else %}<h1>{{ home.title }}</h1>{% endif %}
-        {% if home.description %}<p class="lead mb-5">{{ home.description|safe }}</p>{% endif %}
 
+        {% else %}<h1>{{ home.title }}</h1>{% endif %}
+        {% if home.description %}<p class="p-5">{{ home.description|safe }}</p>{% endif %}
+
+
+    </section>
+
+    <section class="container mt-5 mb-3 px-4 py-5">
         {% if home.html %}
             <article>
             {% if home.video %}
