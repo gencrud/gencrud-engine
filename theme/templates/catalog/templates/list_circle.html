@@ -1,36 +1,28 @@
 {% load thumbnail %}
 
-{# -- LIST CATEGORIES VERSION 1: round - #}
 {% if objects.exists %}
-    <div class="mt-2 row justify-content-center">
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Games catalogs</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4">
+
         {% for o in objects %}
-        <div class="col-lg-2 text-center">
-            <a class="text-secondary" href="{{ o.get_absolute_url }}">
-                {% if o.get_main_image %}
-                    <img src="{{ o.get_main_image|thumbnail_url:'medium' }}" class="rounded-circle" alt="{{ o.get_main_image.image_title }}" width="160" height="160">
-                {% else %}
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="{{ o.get_main_image.image_title }}" width="160" height="160">
-                {% endif %}
-                <h3 class="h5">{{ o.title }}</h3>
-            </a>
+        <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg"
+                 style="background-image: {% if o.get_main_image %} url({{ o.get_main_image.image.url }}); {% else %} url('unsplash-photo-1.jpg'); {% endif %}">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="pt-5 mt-5 mb-5 display-6"><a class="btn btn-outline-dark" href="{{ o.get_absolute_url }}">{{ o.title }}</a></h2>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="d-flex align-items-center me-3">
+                            <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                            <small>{{ o.html_description|safe }}</small>
+                          </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         {% endfor %}
-    </div>
 
-<!--    {% comment %} LIST CATEGORIES VERSION 2: dark-background --->
-<!--    <div class="mt-2 card-columns">-->
-<!--        {% for cat in home.catalogs.all %}-->
-<!--        <div class="card bg-dark text-white">-->
-<!--            <a class="text-light" href="{{ cat.get_absolute_url }}">-->
-<!--            {% if cat.get_main_image %}-->
-<!--                <img src="{{ cat.get_main_image|thumbnail_url:'medium' }}" class="card-img" alt="{{ cat.get_main_image.image_title }}">-->
-<!--                <div class="card-img-overlay"><h3 class="card-title">{{ cat.title|truncatechars:55 }}</h3></div>-->
-<!--            {% else %}-->
-<!--                <div class="card-body"><h3 class="card-title">{{ cat.title|truncatechars:55 }}</h3></div>-->
-<!--            {% endif %}-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-<!--    {% endcomment %}-->
+    </div>
+</div>
 {% endif %}

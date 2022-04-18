@@ -11,30 +11,36 @@
     {% include 'home/templates/slider.html' %}
 
     <section class="container mt-5 mb-3 px-4 py-5 text-center">
-        {% if not home.title %}{% include 'home/templates/first_step_run.html' %}
-
-        {% else %}<h1>{{ home.title }}</h1>{% endif %}
-        {% if home.description %}<p class="p-5">{{ home.description|safe }}</p>{% endif %}
-
-
-    </section>
-
-    <section class="container mt-5 mb-3 px-4 py-5">
-        {% if home.html %}
-            <article>
-            {% if home.video %}
-                <div class="col-lg-6 mb-4">
-                    <video controls="controls" loop muted autoplay class="d-block w-100">
-                        <source src="{{ home.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                    </video>
+        <div class="col-lg-8 mx-auto">
+            {% if not home.title %}{% include 'home/templates/first_step_run.html' %}
+            {% else %}<h1 class="display-4 fw-bold">{{ home.title }}</h1>{% endif %}
+            {% if home.description %}<p class="p-2">{{ home.description|safe }}</p>{% endif %}
+            <div class="html">{{ home.html|safe }}</div>
+            {% if home.get_main_image %}
+            <div class="overflow-hidden" style="max-height: 42vh;">
+                <div class="container px-5">
+                    <img  class="img-fluid border mb-4" alt="{{ home.get_main_image.image.title }}" width="800" height="600" loading="lazy"
+                          src="{{ home.get_main_image.image.url }}" />
                 </div>
-                <div class="col-lg-6 html">{{ home.html|safe }}</div>
-            {% else %}
-                <div class="html">{{ home.html|safe }}</div>
+            </div>
             {% endif %}
-            </article>
-        {% endif %}
+        </div>
     </section>
+
+    {% include 'default/download.html' with title='Download demo version RideMe' %}
+
+    {% if home.video %}
+    <section class="container mt-5 mb-3 px-4 py-5">
+        <article>
+            <div class="col-lg-6 mb-4">
+                <video controls="controls" loop muted autoplay class="d-block w-100">
+                    <source src="{{ home.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                </video>
+            </div>
+            <div class="col-lg-6 html">{{ home.html|safe }}</div>
+        </article>
+    </section>
+    {% endif %}
 
     {% get_include_area request code='advantages' %}
 
@@ -50,7 +56,7 @@
     </section>
     {% endif %}
 
-    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title=' ' %}
+    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title='Games' %}
     {% get_include_area request code='counter' %}
 
     {% if home.blog %}

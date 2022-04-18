@@ -22,8 +22,10 @@ class BaseProductModel(AbstractPageSeoModel):
 
     DEFAULT_LAYOUT = 'product/templates/product_detail.html'
     IMAGES_MIN_BOTTOM_LAYOUT = 'product/templates/product_detail_layout_images_min_bottom.html'
+    DEFAULT_DEV = 'product/templates/product_detail_layout_dev.html'
     LAYOUTS = (
         (DEFAULT_LAYOUT, 'Шаблон по умолчанию'),
+        (DEFAULT_DEV, 'Шаблон на разработке'),
         (IMAGES_MIN_BOTTOM_LAYOUT, 'Шаблон: мини-изображения под главной фотографией')
     )
 

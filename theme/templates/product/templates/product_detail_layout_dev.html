@@ -1,0 +1,100 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ product.seo_title }}{% endblock %}
+{% block description %}{{ product.seo_description }}{% endblock %}
+{% block keywords %}{{ product.seo_keywords }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with obj=product tree=product.catalog.first.get_family %}
+{% endblock %}
+
+{% block main %}
+
+<section class="container-fluid mt-5 mb-3 py-4">
+    <h1 class="display-3">{{ product.title }}</h1>
+    <hr class="my-4">
+
+    <p class="fs-5 col-md-8">{{ product.description|safe }}</p>
+</section>
+
+{% if product.get_images.exists %}
+<div class="sidebar-product  row mb-3" id="thumbs">
+    {% for img in product.get_images %}
+        {% if img.image %}
+            <div class="col-2 p-0">
+                <a href="{{ img.image|thumbnail_url:'large' }}"
+                    data-fancybox="product"
+                    data-caption="<h6>{{ img.image_title }}</h6><span>{{ img.image_description }}</span>"
+                    class="thumb">
+                    <img src="{{ img.image|thumbnail_url:'medium' }}" alt="thumbnail" class="w-100">
+                </a>
+                {% if img.image_title or img.image_description %}
+                <div class="col-6 text-muted">
+                    <h6 class="small">{{ img.image_title }}</h6>
+                    <small class="small">{{ img.image_description }}</small>
+                </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% include 'default/download.html' with title='Download demo version RideMe' image=product.get_main_image.image %}
+
+<section class="container mt-5 mb-3 p-3">
+    <div class="pt-5 px-5 small">{{ product.html|safe }}</div>
+</section>
+
+<section class="container my-5">
+    <hr class="col-3 col-md-2 mb-3">
+    <div class="row g-5 px-5 py-4">
+        <div class="col-md-6">
+            <h3>Download</h3>
+            <ul class="icon-list mt-3 p-0">
+                {% for p in product.productitem_set.all %}
+                <li class="list-group-item">
+                    <h5 class="lead">
+                        {% if p.text %}Download {{ p.name }}: <a href="{{ p.text }}">{{ p.text }}</a>
+                        {% else %}{{ p.name }}{% endif %}
+                    </h5>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Parameters</h3>
+            <ul class="icon-list mt-3 p-0">
+                {% for p in product.get_product_params %}
+                <li class="list-group-item text-info">
+                    {{ p.param.title }}: <b>{{ p.value }}</b>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <hr class="col-3 col-md-2 mb-3">
+</section>
+
+
+{% include 'default/next_prev.html' %}
+
+{% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='More games' %}
+{% if product.is_allow_comments %}<section class="mb-5">{% include 'default/form_comment.html' %}</section>{% endif %}
+{% if comments %}<section class="container mt-5 mb-5">{% include 'default/comment_list.html' %}</section>{% endif %}
+
+{% endblock %}
+
+
+{% block additional_js %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+        $('[data-fancybox="product"]').fancybox();
+    });
+    </script>
+{% endblock %}

@@ -8,40 +8,39 @@
 
 {% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=object %}{% endblock %}
 
-{# -- {% block leftbar %}    {% include 'default/leftbar.html' with fancybox=object.get_images %}{% endblock -- #}
-
 {% block main %}
-    <div class="container">
-        <article>
-            <h1 class="display-2 mb-3 mt-3">{{ object.title }}</h1>
-            {% if object.description %}<p class="lead">{{ object.description|safe }}</p>{% endif %}
-            {% if object.get_images.exists %}
-                <section class="container-fluid mt-5 mb-5">
-                    {% include 'default/images_list_carousel.html' with images=object.get_images %}
-                </section>
-            {% endif %}
-            <div class="mt-5 row justify-content-md-center">
-                {% if object.video %}
-                    <div class="col">
-                        <video controls="controls" loop muted autoplay class="d-block w-100">
-                            <source src="{{ object.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                        </video>
-                    </div>
-                {% endif %}
-                <div class="col html">{{ object.html|safe }}</div>
-            </div>
-        </article>
-        <hr class="mt-5 mb-5" />
-        <section>
-            <div class="row">
-                {% if object.is_allow_comments %}
-                    <div class="col">{% include 'default/form_comment.html' with type='page' %}</div>
-                {% endif %}
-                <div class="col-lg-8 col-md-6">{% include 'default/comment_list.html' with comments=object.get_comments %}</div>
-            </div>
-        </section>
-    </div>
+<section class="container-fluid mt-5 mb-3">
+    <h1 class="display-3">{{ object.title }}</h1>
+    <hr class="my-4">
+    {% if object.description %}<p class="col-md-8">{{ object.description|safe }}</p>{% endif %}
+</section>
+
+{% if object.get_images.exists %}
+    <section class="container-fluid mt-5 mb-5">
+        {% include 'default/images_list_carousel.html' with images=object.get_images %}
+    </section>
+{% endif %}
+
+
+{% if object.video %}
+<section class="container mt-5 mb-5">
+    <video controls="controls" loop muted autoplay class="d-block w-100">
+        <source src="{{ object.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    </video>
+</section>
+{% endif %}
+
+{% if object.html %}
+<section class="container mb-5 p-3">
+    <div class="px-3 small">{{ object.html|safe }}</div>
+</section>
+{% endif %}
+
+{% if object.is_allow_comments %}<section class="mb-5">{% include 'default/form_comment.html' with type='page' %}</section>{% endif %}
+<div class="col-lg-8 col-md-6">{% include 'default/comment_list.html' with comments=object.get_comments %}</div>
+
 {% endblock %}
+
 
 {% block additional_js %}{{ object.scripts|safe }}{% endblock %}
 

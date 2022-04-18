@@ -2,182 +2,117 @@
 {% load mptt_tags %}
 {% load url_handler %}
 {% load thumbnail %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar scroll</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-      <div class="collapse navbar-collapse" id="navbarScroll">
+<section class="row">
 
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
-
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-
-          </ul>
-
-        </li>
-
-      </ul>
-
-    </div>
-  </div>
-</nav>
-{% comment %}
-<nav class="navbar navbar-light bg-light fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Offcanvas navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+    <nav class="navbar navbar-expand-lg navbar-dark col-11">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" title="{{ setting_template.site }}">
+                {% if setting_template.logo %}
+                    <img style="max-height:40px"
+                         src="{{ setting_template.logo|thumbnail_url:'medium' }}"
+                         alt="{{ setting_template.site.name }}">
+                {% elif setting_template.title %}
+                    <strong>{{ setting_template.title }}</strong>
+                {% else %}
+                    <strong>Gen[crud]</strong>
+                {% endif %}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
-{% endcomment %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarScroll" aria-controls="navbarScroll"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    {% recursetree mainmenu %}
+                        {% if node.is_leaf_node and not node.get_ancestors.exists %}
+                            <li class="nav-item {% if current_url == node.get_url and current_url != '/' %} active{% endif %}">
+                                <a class="nav-link {% if current_url == node.get_url and current_url != '/' %} active{% endif %}"
+                                   aria-current="page" href="{{ node|url_handler:'mainmenu' }}">
+                                    {{ node.name }}
+                                </a>
+                            </li>
+                        {% elif not node.is_leaf_node and not node.get_ancestors.exists %}
+                            <li class="nav-item dropdown {% if current_url == node.get_url and current_url != '/' %} active{% endif %}">
+                                <a class="nav-link dropdown-toggle {% if current_url == node.get_url and current_url != '/' %} active{% endif %}"
+                                   href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                   id="navbarScrollingDropdown{{node.pk}}">
+                                    {{ node.name }}
+                                </a>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown{{node.pk}}">{{ children }}</ul>
+                                {% endif %}
+                            </li>
+                        {% elif node.is_leaf_node and node.get_ancestors.exists %}
+                            <li><a class="dropdown-item nav-link {% if current_url == node.get_url and current_url != '/' %} active{% endif %}"
+                                   href="{{ node|url_handler:'mainmenu' }}">{{ node.name }}</a></li>
+                        {% endif %}
+
+                        {% if cart|length %}<li class="nav-item">{% include 'cart/templates/icon.html' %}</li>{% endif %}
+
+                    {% endrecursetree %}
+              </ul>
+
+            </div>
+        </div>
+    </nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container-fluid">
-    <a href="/" class="logo navbar-brand" title="{{ setting_template.site }}">
-    {% if setting_template.logo %}
-        <img style="max-height:40px"
-             src="{{ setting_template.logo|thumbnail_url:'medium' }}"
-             alt="Site name {{ setting_template.site.name }}">
-        <span class="sr-only">{{ setting_template.site.name }}</span>
-    {% elif setting_template.title %}
-        <span>{{ setting_template.title }}</span>
-    {% else %}
-        <span>Gen[crud]</span>
-    {% endif %}
-    </a>
+    <nav class="navbar navbar-dark col-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <button class="navbar-toggler" type="button"
-        data-toggle="collapse" data-target="#navbarMainMenu"
-        aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarMainMenu">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            {% recursetree mainmenu %}
-                {% if node.is_leaf_node and not node.get_ancestors.exists %}
-                <li class="nav-item {% if current_url == node.get_url and current_url != '/' %} active{% endif %}">
-                    <a class="nav-link" title="{{ node.name }}"
-                       href="{{ node|url_handler:'mainmenu' }}">{{ node.name }}
-                        {% if current_url == node.get_url and current_url != '/' %} <span class="sr-only">(current)</span>{% endif %}
-                    </a>
-                </li>
-                {% endif %}
-
-                {% if not node.is_leaf_node and not node.get_ancestors.exists %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown{{node.pk}}" role="button" data-toggle="dropdown" aria-expanded="false">
-                            {{ node.name }}
-                            {% if current_url == node.get_url and current_url != '/' %} <span class="sr-only">(current)</span>{% endif %}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{node.pk}}">
-                            {{ children }}
-                        </ul>
-                    </li>
-                {% endif %}
-
-                {% if node.is_leaf_node and node.get_ancestors.exists %}
-                    <li><a class="dropdown-item" href="{{ node|url_handler:'mainmenu' }}">{{ node.name }}</a></li>
-                {% endif %}
-                        {% comment %}
-            <li class="nav-item {% if current_url == node.get_url and current_url != '/' %} active{% endif %}
-                {% if not node.is_leaf_node %} dropdown{% endif %}">
-                <a class="nav-link {% if not node.is_leaf_node %} dropdown-toggle{% endif %}" title="{{ node.name }}"
-                   href="{% if node %}{{ node|url_handler:'mainmenu' }}{% else %}/{% endif %}">{{ node.name }}
-                   {% if current_url == node.get_url and current_url != '/' %} <span class="sr-only">(current)</span>{% endif %}
-                </a>
-                {% if not node.is_leaf_node %}
-                    <ul class="dropdown-menu">{{ children }}</ul>
-                {% endif %}
-            </li>
-            {% endcomment %}
-            {% endrecursetree %}
-        </ul>
-
-        <ul class="navbar-nav col-2">
-            {% if cart|length %}<li class="nav-item">{% include 'cart/templates/icon.html' %}</li>{% endif %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarToggleMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="navbar-toggler-icon"></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarToggleMenu">
-                    {% comment %}
-                    <a class="dropdown-item text-info" type="button" data-toggle="modal" data-target="#claim-modal" title="Заявка">
-                        <i class="fa fa-bullhorn"></i> Заявка{% csrf_token %}
-                    </a>
-                    {% endcomment %}
-                    {% if user.is_authenticated %}
-                    <a class="dropdown-item text-info" href="{% url 'profile' %}" title="Профиль">
-                        <i class="fa fa-user"></i> Profile
-                    </a>
-                    {% else %}
-                    {# -- MODAL <a href="#" data-toggle="modal" data-target="#login-modal">Login</a> #}
-                        <a class="dropdown-item text-info" href="{% url 'user_login' %}" title="Войти">
-                            <i class="fa fa-user"></i> Log in
-                        </a>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                        <a class="dropdown-item text-info" href="{% url 'logout' %}" title="Выход">
-                            <i class="fa fa-reply"></i> Logout
-                        </a>
-                    {% else %}
-                        <a class="dropdown-item text-info" href="{% url 'user_register' %}" title="Registration">
-                            <i class="fa fa-pencil"></i> Registration
-                        </a>
-                    {% endif %}
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h4 class="offcanvas-title" id="offcanvasNavbarLabel">Inner menu</h4>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
                 </div>
-            </li>
-            {#---- % include 'order/templates/claim_form.html' with type="modal" title="Быстрая заявка" subtitle="Так мы быстрее отреагируем на ваш запрос!" % ----#}
-        </ul>
-    </div>
-      </div>
-</nav>
+
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 h5">
+                        {% if cart|length %}
+                            <li class="nav-item py-3">{% include 'cart/templates/icon.html' %}</li>
+                        {% endif %}
+
+                            {% if user.is_authenticated %}
+                                <li class="nav-item py-3"><a href="{% url 'profile' %}" title="Профиль">
+                                <i class="fa fa-user"></i> Profile
+                            </a></li>
+                            {% else %}
+                            {# -- MODAL <li class="nav-item px-3"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a> #}
+                                <li class="nav-item py-3"><a href="{% url 'user_login' %}" title="Войти">
+                                <i class="fa fa-user"></i> Log in
+                            </a></li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <li class="nav-item py-3"><a href="{% url 'logout' %}" title="Выход">
+                                    <i class="fa fa-reply"></i> Logout
+                                </a></li>
+                            {% else %}
+                                <li class="nav-item py-3"><a href="{% url 'user_register' %}" title="Registration">
+                                    <i class="fa fa-pencil"></i> Registration
+                                </a></li>
+                            {% endif %}
+
+                        {#---- % include 'order/templates/claim_form.html' with type="modal" title="Быстрая заявка" subtitle="Так мы быстрее отреагируем на ваш запрос!" % ----#}
+                    </ul>
+
+                    <!--        <form class="d-flex">-->
+                    <!--          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <!--          <button class="btn btn-outline-success" type="submit">Search</button>-->
+                    <!--        </form>-->
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+</section>

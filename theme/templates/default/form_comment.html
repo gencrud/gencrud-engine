@@ -1,13 +1,28 @@
-{% if 'page' in type %}
-<form id="comment-form" method="post" action="{% url 'page_comment' object.id %}">{% csrf_token %}
-{% elif 'post' in type %}
-<form method="post" action="">{% csrf_token %}
-{% else %}
-<form method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
-{% endif %}
-    <fieldset class="p-5">
-        <div class='alert-danger'>{{ comment_form.errors }}</div>
-        {{ comment_form.as_p }}
-    </fieldset>
-    <button type="submit" class="btn btn-lg btn-block btn-outline-primary"><i class="fa fa-comment-o"></i> Send </button>
-</form>
+<div class="container px-4">
+    <div class="row align-items-center g-lg-5">
+        <div class="col-lg-6 text-center text-lg-start">
+            <h3 class="display-6 fw-bold">Comment form</h3>
+            <hr class="my-4">
+            <p>It will be nice to see a comment, feedback, advice, whatever. This will allow me to pull myself together and continue development :)<br />
+                Please comment.</p>
+        </div>
+
+        <div class="col-md-10 mx-auto col-lg-6">
+            {% if 'page' in type %}
+            <form class="p-4 p-md-5" id="comment-form" method="post" action="{% url 'page_comment' object.id %}">{% csrf_token %}
+            {% elif 'post' in type %}
+            <form class="p-4 p-md-5" method="post" action="">{% csrf_token %}
+            {% else %}
+            <form class="p-4 p-md-5" method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
+            {% endif %}
+                <fieldset>
+                    <div class='alert-danger'>{{ comment_form.errors }}</div>
+                    {{ comment_form.as_p }}
+                </fieldset>
+
+                <button type="submit" class="w-100 btn btn-lg btn-outline-primary"><i class="fa fa-comment-o"></i> Send </button>
+                <hr class="m-4">
+            </form>
+        </div>
+    </div>
+</div>
