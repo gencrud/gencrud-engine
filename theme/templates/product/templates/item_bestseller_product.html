@@ -13,9 +13,7 @@
         {% for product in objects %}
         <div class="col">
             <div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg"
-                 style="background-image: {% if product.get_main_image %}url({{ product.get_main_image.image.url }}){% else %} url('unsplash-photo-1.jpg'){% endif %};
-                     background-attachment: fixed;
-                     background-repeat: no-repeat;">
+                 style="background-image: {% if product.get_main_image %}url({{ product.get_main_image.image.url }}){% else %} url('unsplash-photo-1.jpg'){% endif %};">
                 <div class="d-flex flex-column h-100 p-5">
                     <h3 class="pt-5 mt-5">{{ product.title|truncatechars:120 }}</h3>
                     <ul class="list-unstyled mt-auto bg-dark p-2">

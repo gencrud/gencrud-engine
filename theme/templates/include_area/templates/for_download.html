@@ -1,0 +1,43 @@
+{% load static %}
+
+{% if include_areas.exists and include_areas.first.queryset_for_download.exists %}
+<section class="container mt-5 mb-3 px-4 py-5"
+        {% if include_areas.first.queryset_for_download.first.image %}
+        style="background-image: url({{ include_areas.first.queryset_for_download.first.image.url }});
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;"
+        >
+        {% endif %}
+
+    <h2 class="pb-2 display-6 text-center fw-bold border-bottom">
+        {% if title %}
+        {{ title }}
+        {% elif include_areas.first.queryset_for_download.first.description %}
+        {{ include_areas.first.queryset_for_download.first.description }}
+        {% endif %}
+    </h2>
+
+    <div class="my-auto p-5">
+        <div class="btn-group btn-group-lg" role="group" aria-label="Downloads">
+            {% for area in include_areas.first.queryset_for_download %}
+                <input type="radio" class="btn-check" name="btnradio" autocomplete="off"
+                    id="btnradio{{area.pk}}" value="{{area.url}}"
+                    onclick="prepareToDownload(this)">
+                <label class="btn btn-outline-dark"
+                       for="btnradio{{area.pk}}"
+                       title="{{area.title}}: {{area.description}}">{{area.title}}</label>
+            {% endfor %}
+        </div>
+        <a id="id_btn_download" class="disabled btn btn-lg btn-dark px-5 mx-auto" href="#"> DOWNLOAD </a>
+    </div>
+</section>
+
+<script>
+    function prepareToDownload(input_elem) {
+        document.getElementById('id_btn_download').href = input_elem.value;
+        document.getElementById('id_btn_download').classList.remove('disabled');
+    }
+</script>
+{% endif %}

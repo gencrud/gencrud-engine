@@ -8,13 +8,14 @@
         </div>
 
         <div class="col-md-10 mx-auto col-lg-6">
-            {% if 'page' in type %}
+            {% if 'page' == type %}
             <form class="p-4 p-md-5" id="comment-form" method="post" action="{% url 'page_comment' object.id %}">{% csrf_token %}
-            {% elif 'post' in type %}
+            {% elif 'post' == type %}
             <form class="p-4 p-md-5" method="post" action="">{% csrf_token %}
             {% else %}
             <form class="p-4 p-md-5" method="post" action="{% url 'product_comment' product_id=product.id %}">{% csrf_token %}
             {% endif %}
+
                 <fieldset>
                     <div class='alert-danger'>{{ comment_form.errors }}</div>
                     {{ comment_form.as_p }}

@@ -27,7 +27,7 @@
         </div>
     </section>
 
-    {% include 'default/download.html' with title='Download demo version RideMe' %}
+    {% get_include_area request code='for_download' title='Download demo version RideMe' %}
 
     {% if home.video %}
     <section class="container mt-5 mb-3 px-4 py-5">
@@ -85,7 +85,11 @@
     </section>
     {% endif %}
 
-    {% get_include_area request code='brands' %}
+{% if home.is_allow_comments %}
+<section class="my-5">{% include 'default/form_comment.html' with type='product' product=new_products.0 %}</section>
+{% endif %}
+
+{% get_include_area request code='brands' %}
 
 {% endblock %}
 

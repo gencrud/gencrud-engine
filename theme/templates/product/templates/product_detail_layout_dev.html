@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 {% load thumbnail %}
+{% load get_include_area %}
 
 {% block title %}{{ product.seo_title }}{% endblock %}
 {% block description %}{{ product.seo_description }}{% endblock %}
@@ -43,7 +44,7 @@
     {% endfor %}
 </div>
 {% endif %}
-{% include 'default/download.html' with title='Download demo version RideMe' image=product.get_main_image.image %}
+{% get_include_area request code='for_download' %}
 
 <section class="container mt-5 mb-3 p-3">
     <div class="pt-5 px-5 small">{{ product.html|safe }}</div>
