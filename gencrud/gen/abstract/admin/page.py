@@ -67,7 +67,16 @@ class AbstractMPTTPageSeoAdmin(AbstractDefaultMPTTAdmin, BaseContentAdmin, BaseS
     list_display_links = ('parent',) + AbstractPageSeoAdmin.list_display_links
     list_editable = AbstractPageSeoAdmin.list_editable
     filter_horizontal = AbstractPageSeoAdmin.filter_horizontal
-    fieldsets = AbstractPageSeoAdmin.fieldsets
+    fieldsets = (
+        AbstractPageSeoAdmin.fieldsets[0],
+        ('Inner elements', {
+            'classes': COLLIDE_CLASSES_CSS,
+            'fields': ('parent', 'tags')
+        }),
+        AbstractPageSeoAdmin.fieldsets[2],
+        AbstractPageSeoAdmin.fieldsets[3],
+        AbstractPageSeoAdmin.fieldsets[4]
+    )
 
     def rebuild(self, request, queryset):
         self.model.objects.rebuild()

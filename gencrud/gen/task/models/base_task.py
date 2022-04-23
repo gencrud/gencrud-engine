@@ -3,6 +3,7 @@ from gen.abstract.models import AbstractMPTTPageSeoModel
 from task.models.task_image import TaskImage
 from gen.task.strings import BASE_TASK_VERBOSE_NAME, BASE_TASK_VERBOSE_NAME_PLURAL
 from gen.task.strings import NAME_APP as TASK_NAME_APP
+from filebrowser.fields import FileBrowseField
 
 
 class BaseTaskModel(AbstractMPTTPageSeoModel):
@@ -15,18 +16,14 @@ class BaseTaskModel(AbstractMPTTPageSeoModel):
     class MPTTMeta:
         order_insertion_by = ('parent', 'sort')
 
+    document = FileBrowseField("Documents", max_length=256, directory="documents/", null=True, blank=True)
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         super().get_absolute_url()
-
-        kwargs = {
-            'slug': self.slug,
-            # 'year': '%04d' % self.created.year,
-            # 'month': '%02d' % self.created.month,
-            # 'day': '%02d' % self.created.day,
-        }
+        kwargs = {'slug': self.slug}
         return reverse(TASK_NAME_APP, kwargs=kwargs)
 
     def get_images(self):

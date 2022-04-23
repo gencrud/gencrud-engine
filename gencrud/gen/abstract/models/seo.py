@@ -43,3 +43,4 @@ class AbstractSeoModel(models.Model):
     def get_absolute_url(self):
         if not self.slug:
             self.short_slug()
+        return self.slug

@@ -5,4 +5,4 @@ from catalog.models import ProductItem
 class ProductItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductItem
-        fields = ['pk', 'name', 'price', 'price_discount', 'product']
+        fields = ['pk', 'name', 'price_discount', 'product']

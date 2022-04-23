@@ -19,25 +19,61 @@
 {% endblock %}
 
 {% block main %}
+<section class="container-fluid mt-5 mb-3">
+    <h1 class="display-3">{{ object.title }}</h1>
+    <hr class="my-4">
+    {% if object.description %}<p class="col-md-8">{{ object.description|safe }}</p>{% endif %}
+    {% if object.get_main_image %}
+    <img class="img-responsive" src="{% version object.get_main_image.image 'max' %}" title="{{ object.get_main_image.image_title }}" alt="{{ object.get_main_image.image_title }}">
+    {% endif %}
+</section>
 
-    <div class="col-md-9">
-        <div class="box row">
-            <h1>{{ object.title }}</h1>
-            {% if object.get_main_image %}
-                <img class="img-responsive" src="{% version object.get_main_image.image 'max' %}" title="{{ object.get_main_image.image_title }}" alt="{{ object.get_main_image.image_title }}">
-            {% endif %}
-        </div>
-        {% if object.html %}
-            <div class="box">
-                <div class="content">{{ object.html|safe }}</div>
-            </div>
-        {% endif %}
-        {% include 'catalog/templates/catalog_child_list.html' %}
-        {% include 'catalog/templates/catalog_sort_row.html' with type='task' %}
-        {% include 'task/templates/gallery_photo_list.html' %}
+{% if object.get_images.exists %}
+    <section class="container-fluid my-5">
+        {% include 'default/images_list_carousel.html' with images=object.get_images %}
+    </section>
+{% endif %}
 
-    </div>
+{% if object.document %}
+<iframe src="{{ object.document.url }}" height="1120" width="100%"></iframe>
+{% endif %}
+
+{% if object.video %}
+<section class="container my-5">
+    <video controls="controls" loop muted autoplay class="d-block w-100">
+        <source src="{{ object.video.url }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    </video>
+</section>
+{% endif %}
+
+{% if object.html %}
+<section class="container my-5 p-3">
+    <div class="px-3 small">{{ object.html|safe }}</div>
+</section>
+{% endif %}
+
+{% if object.is_allow_comments %}
+<section class="container my-5 p-3">
+    {% include 'default/form_comment.html' with type='page' %}
+</section>
+{% endif %}
+
+{% if object.get_comments %}
+<section class="container my-5 p-3">
+    {% include 'default/comment_list.html' with comments=object.get_comments %}
+</section>
+{% endif %}
+
+
+
+<section class="container my-5 p-3">
+    {% include 'catalog/templates/catalog_sort_row.html' with type='task' %}
+    {% include 'task/templates/gallery_photo_list.html' %}
+</section>
 
 {% endblock %}
 
-{% block additional_js %}{% endblock %}
+
+
+
+{% block additional_js %}{{ object.scripts|safe }}{% endblock %}
