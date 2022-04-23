@@ -16,10 +16,12 @@ class BaseIncludeAreaModel(models.Model):
     ADVANTAGES = 'advantages'
     BRANDS = 'brands'
     COUNTER = 'counter'
+    FOR_DOWNLOAD = 'for_download'
     CODE_CHOICES = (
         (ADVANTAGES, 'Наши преимущества'),
         (BRANDS, 'Брэнды'),
         (COUNTER, 'Счетчик'),
+        (FOR_DOWNLOAD, 'Для скачиваний'),
     )
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     is_show = models.BooleanField(default=True, verbose_name="Отображать")
@@ -49,3 +51,6 @@ class BaseIncludeAreaModel(models.Model):
     def get_main_image(self):
         return self.image if self.image else None
 
+    def queryset_for_download(self):
+        from site_info.models import IncludeArea
+        return IncludeArea.objects.filter(code=self.FOR_DOWNLOAD, is_show=True)

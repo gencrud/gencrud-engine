@@ -51,11 +51,6 @@
             {% endif %}
         </div>
         <div class="mt-3 row">
-
-            {% comment %}
-            <div class="col">{% include 'search/search_form.html' %}</div>
-            {% endcomment %}
-
             {% if footer.text_info %}
             <div class="col">
                 <h4>{{ footer.text_info.title }}</h4>
@@ -66,14 +61,14 @@
         </div>
     </div>
 
-    <div class="container text-white small">
+    <div class="container small">
         <hr />
         <div class="row">
             <div class="col">
-                <span class="2020">©2020 / ©{% now 'Y' %}</span>
+                <small>©2020 / ©{% now 'Y' %}</small>
             </div>
             <div class="col">
-                <span class="pull-right">Developer <a href="email:gencrud@gmail.com">Gen[crud]</a></span>
+                <small>Developer <a href="email:gencrud@gmail.com">Gen[crud]</a></small>
             </div>
         </div>
     </div>
